@@ -11,7 +11,7 @@
 </ul>
 
 <h2>Dev Checklist</h2>
-    [-] Create User account
+ # [checkbox:unchecked] Create User account
  - [ ] Create groups for notes
  - [ ] Add notes to groups
  - [ ] Link notes
