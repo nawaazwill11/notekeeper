@@ -14,6 +14,5 @@
  Create User account
 Create groups for notes
 ddsdsd
-- [ ] Add notes to groups
-- [ ] Link notes
+- [ ] Add notes to groups- [ ] Link notes
 
