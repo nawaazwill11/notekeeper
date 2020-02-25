@@ -11,9 +11,11 @@
 </ul>
 
 <h2>Dev Checklist</h2>
- Create User account
+&#333
+
 Create groups for notes
 ddsdsd
 - [ ] Add notes to groups
 - [ ] Link notes
+
 
