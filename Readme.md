@@ -10,4 +10,9 @@
     <li>Share notes using unique URLs</li>
 </ul>
 
-<h2>User Stories</h2>
+<h2>Dev Checklist</h2>
+ [] Create User account
+ [] Create groups for notes
+ [] Add notes to groups
+ [] Link notes
+
