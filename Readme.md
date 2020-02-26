@@ -12,8 +12,9 @@
 
 <h2>Dev Checklist</h2>
 
-<ul>
-    <li>Create user accounts</li>
-    <li>Create groups for notes</li>
-    <li>Add links to notes</li>
-</ul>
+- [ ] Create groups for notes
+- [ ] ddsdsd
+- [ ] Add notes to groups
+- [ ] Link notes
+
+
