@@ -1,6 +1,0 @@
-.gitignore
-__pycache__
-node_modules
-.vscode
-application/credentials
-env
