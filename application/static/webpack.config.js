@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
       path: __dirname + '/dist',
-      filename: 'css/[name].js',
+      filename: 'bundle/[name].js',
     },
     plugins: [
         new HtmlWebpackPlugin({
