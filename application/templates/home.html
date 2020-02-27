@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block stylesheets %}
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/bundle/home.css') }}">
 {% endblock %}
 
 {% block content %}
     <h1>Yelo!</h1>
 
-    <button class="mdc-button foo-button">
+    <button id="sample" class="mdc-button foo-button">
         <div class="mdc-button__ripple"></div>
         <span class="mdc-button__label">Button</span>
     </button>   
@@ -19,8 +19,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script type="text/javascript" src="{{ url_for('static', filename='dist/css/home.js') }}"></script></body>
-    <script>
-    mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'));
-   </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='dist/bundle/home.js') }}"></script></body>
 {% endblock %}

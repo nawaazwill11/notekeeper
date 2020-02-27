@@ -6,8 +6,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{% block title %}{% endblock %} - Book Keeper</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Page title -->
+        <title>{% block title %}{% endblock %} - Book Keeper</title>
         
         <!-- Common stylesheets for all pages -->
         {% include 'common/stylesheets.html' %}
@@ -21,7 +23,15 @@
         <![endif]-->
         
         <nav>
-            
+          <header class=" mdc-top-app-bar">
+            <div class="mdc-top-app-bar__row">
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+               <span class="mdc-top-app-bar__title mdc-typography--headline5">Note Keeper</span> </section>
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+               
+              </section>
+            </div>
+          </header>
         </nav>
 
          <!-- Body content -->
