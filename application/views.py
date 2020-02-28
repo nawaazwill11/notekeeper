@@ -7,11 +7,18 @@ from flask import (
 from . import app
 
 # A list of all html templates
-templates = {'home': 'home.html'}
+templates = {
+    'home': 'home.html',
+    'about': 'about.html'
+    }
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def home():
     return render_template(templates['home'])
+
+@app.route("/about", methods=['GET'])
+def about():
+    return render_template(templates['about'])
 
 @app.route('/manifest.json')
 def manifest():

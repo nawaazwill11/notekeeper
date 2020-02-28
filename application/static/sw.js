@@ -8,10 +8,7 @@ async function installServiceWorker() {
 
     const cache = await caches.open(getCacheName());
 
-    await cache.addAll([
-        "https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css",
-        "https://fonts.googleapis.com/icon?family=Material+Icons",
-    ]);
+    await cache.addAll(getFilesToCache());
 
     return self.skipWaiting();
 }
@@ -68,4 +65,13 @@ function log(message) {
 
 function getCacheName() {
     return 'app-cache-' + VERSION;
+}
+
+function getFilesToCache() {
+    return [
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
+        "https://code.jquery.com/jquery-3.4.1.slim.min.js",
+        "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js",
+    ]
 }
