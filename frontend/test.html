@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+
+  </head>
+  <body>
+    <div id='container'></div>
+    <script>
+    'use strict';
+
+var Hello = React.createClass({
+    displayName: 'Hello',
+    
+    componentDidMount: function componentDidMount() {
+        this.setState({
+            blah: ['Append to blah'],
+            pokey: ['pokey from parent']
+        });
+    },
+
+    getInitialState: function () {
+      return {
+        blah: [],
+        pokey: []
+      };
+    },
+
+    appendBlah: function appendBlah(blah) {
+        var blahs = this.state.blah;
+        blahs.push(blah);
+        this.setState({ blah: blahs });
+    },
+    render: function render() {
+        var blahs = this.state.blah.map(function (b) {
+            return '<h2>' + b + '</h2>';
+        }).join('');
+        return React.createElement(
+            'div',
+            { 'class': 'blah' },
+            { blahs: blahs },
+            React.createElement(SubComponent, { pokeys: this.state.pokey, parent: this })
+        );
+    }
+});
+
+var SubComponent = React.createClass({
+    displayName: 'SubComponent',
+
+    componentDidMount: function componentDidMount() {
+        this.props.parent.appendBlah('append to div in parent?');
+    },
+
+    render: function render() {
+        var pokeys = this.props.pokeys.map(function (p) {
+            return '<h2>' + p + '</h2>';
+        }).join('');
+        return React.createElement(
+            'div',
+            { 'class': 'pokey' },
+            { pokeys: pokeys }
+        );
+    }
+});
+
+React.render(React.createElement(Hello, { name: 'World' }), document.getElementById('container'));
+    </script>
+  </body>
+</html>
