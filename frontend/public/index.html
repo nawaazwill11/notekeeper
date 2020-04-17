@@ -54,17 +54,184 @@
     <div class="container">
       <div id="control-container">
         <div id="control-content">
-          <div id="add-note">
+          <div id="add-note" class="control">
             <button class="btn">New note</button>
           </div>
-          <div id="delete-note">
-            <button class="btn"></button>
+          <div id="delete-note" class="control">
+            <button class="btn">Delete notes</button>
           </div>
         </div>
       </div>
-      <main class="note-container">
-        
+      <main id="notes-container">
+        <div id="checker">
+            <input type="checkbox">
+        </div>
+        <div id="notes-content">
+            <div class="note" data-mode="view">
+                <div class="note-menu">
+                    <div class="note-menu-img">
+                        <img src="%PUBLIC_URL%/menu.svg" alt="menu">
+                    </div>
+                    <div class="note-menu-list-container">
+                        <ul class="note-menu-list">
+                            <li class="note-menu-item">Edit</li>
+                            <li class="note-menu-item">Delete</li>
+                            <li class="note-menu-item">Archive</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="note-content">
+                    <div class="note-title">
+                    <b>Title</b>
+                    </div>
+                    <div class="note-main">
+                    Description
+                    </div>
+                </div>
+
+            </div>
+            <div class="note" data-mode="view">
+                <div class="note-menu">
+                    <div class="note-menu-img">
+                        <img src="%PUBLIC_URL%/menu.svg" alt="menu">
+                    </div>
+                    <div class="note-menu-list-container">
+                        <ul class="note-menu-list">
+                            <li class="note-menu-item">Edit</li>
+                            <li class="note-menu-item">Delete</li>
+                            <li class="note-menu-item">Archive</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="note-content">
+                    <div class="note-title">
+                        <b>Title</b>
+                    </div>
+                    <div class="note-main">
+                        Description
+                    </div>
+                </div>
+            </div>
+        </div>
       </main>
+      <!-- <div id="note-editor-container">
+            <div id="note-editor-main">
+                <div id="note-editor">
+                    <div id="note-editor-content">
+                        <div id="e_note-head">
+                            <div id="note-title">
+                                <input type="text" value="title">
+                            </div>
+                        </div>
+                        <div id="e_note-main">
+                            <div id="e_note">
+                                <div class="e_note-inner"></div>
+                                <div class="kp-adder">
+                                    <button>Add Keypoint</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+      </div> -->
     </div>
+    <div id="editor-container">
+      <div id="editor-panel">
+        <div id="editor-content">
+          <div id="note-title">
+            <input type="text" placeholder="Title">
+          </div>
+          <div id="note-main-container">
+            <div id="note-main">
+              <div id="kp-container">
+                <div id="kp-main">
+                  <div class="kp-block">
+                    <div class="kp-block-content">
+                      <div class="kp-block-layer">
+                        <div class="kp-keypoint">
+                          <input class="inp-flat" type="text" placeholder="Keypoint">
+                        </div>
+                      </div>
+                      <div class="kp-block-layer">
+                        <div class="description">
+                          <input class="inp-flat" type="text" placeholder="Description">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="kp-block-action-container">
+                      <div class="kp-block-action">
+                        <div class="action-node">
+                          <button>-</button>
+                        </div>
+                        <div class="action-node">
+                          <button>C</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="kp-adder">
+                <button>Add keypoint</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const notes = document.querySelectorAll('.note');
+        notes.forEach((note) => {
+            note.addEventListener('click', function (e) {
+                this.dataset.mode = this.dataset.mode == 'view' ? 'edit' : 'view';
+                if (this.dataset.mode === 'edit') {
+                    this.classList.add('active');
+                }
+                else {
+                    this.classList.remove('active');
+                }
+
+            });
+            const menu = note.querySelector('.note-menu');
+            const menu_options = menu.querySelector('.note-menu-list-container');
+            const menu_items = menu.querySelectorAll('.note-menu-item');
+            console.log('mi', menu_items)
+            const menu_item_action = {
+                'edit': function(e) {
+                    editNote(e)
+                },
+                'delete': function() {
+                    alert('delete');
+                },
+                'archive': function() {
+                    alert('archive');
+                }
+            }
+            menu_items.forEach((item) => {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    menu_item_action[item.innerHTML.toLowerCase()](e);
+                    note.mouseleave();
+                })
+            })
+            note.addEventListener('mouseover', function (e) {
+                menu.classList.add('visible');
+            });
+            note.addEventListener('mouseleave', function (e) {
+                menu.classList.remove('visible');
+                menu_options.classList.remove('visible');
+            });
+            menu.addEventListener('click', function (e) {
+                e.stopPropagation();
+                menu_options.classList.add('visible');
+            })
+        });
+        function editNote(e) {
+            
+            
+        }
+    </script>
   </body>
 </html>

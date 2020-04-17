@@ -35,7 +35,7 @@ class App extends React.Component {
         //         </div>
         //     );
         // }
-        return <Button type="primary">Button</Button>
+        return <div></div>
     }
 }
 
