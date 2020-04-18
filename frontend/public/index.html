@@ -140,6 +140,9 @@
     <div id="editor-container">
       <div id="editor-panel">
         <div id="editor-content">
+          <div id="editor-close">
+            <button>x</button>
+          </div>
           <div id="note-title">
             <input type="text" placeholder="Title">
           </div>
@@ -147,91 +150,30 @@
             <div id="note-main">
               <div id="kp-container">
                 <div id="kp-main">
-                  <div class="kp-block">
-                    <div class="kp-block-content">
-                      <div class="kp-block-layer">
-                        <div class="kp-keypoint">
-                          <input class="inp-flat" type="text" placeholder="Keypoint">
-                        </div>
-                      </div>
-                      <div class="kp-block-layer">
-                        <div class="description">
-                          <input class="inp-flat" type="text" placeholder="Description">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="kp-block-action-container">
-                      <div class="kp-block-action">
-                        <div class="action-node">
-                          <button>-</button>
-                        </div>
-                        <div class="action-node">
-                          <button>C</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div id="kp-adder">
                 <button>Add keypoint</button>
               </div>
             </div>
+
+          </div>
+          <div id="editor-controls-container">
+            <div id="editor-controls-content">
+              <div id="editor-controls">
+                <div class="editor-control-node">
+                  <button id="save">Save</button>
+                </div>
+                <div class="editor-control-node">
+                  <button id="discard">Discard</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <script>
-        const notes = document.querySelectorAll('.note');
-        notes.forEach((note) => {
-            note.addEventListener('click', function (e) {
-                this.dataset.mode = this.dataset.mode == 'view' ? 'edit' : 'view';
-                if (this.dataset.mode === 'edit') {
-                    this.classList.add('active');
-                }
-                else {
-                    this.classList.remove('active');
-                }
-
-            });
-            const menu = note.querySelector('.note-menu');
-            const menu_options = menu.querySelector('.note-menu-list-container');
-            const menu_items = menu.querySelectorAll('.note-menu-item');
-            console.log('mi', menu_items)
-            const menu_item_action = {
-                'edit': function(e) {
-                    editNote(e)
-                },
-                'delete': function() {
-                    alert('delete');
-                },
-                'archive': function() {
-                    alert('archive');
-                }
-            }
-            menu_items.forEach((item) => {
-                item.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    menu_item_action[item.innerHTML.toLowerCase()](e);
-                    note.mouseleave();
-                })
-            })
-            note.addEventListener('mouseover', function (e) {
-                menu.classList.add('visible');
-            });
-            note.addEventListener('mouseleave', function (e) {
-                menu.classList.remove('visible');
-                menu_options.classList.remove('visible');
-            });
-            menu.addEventListener('click', function (e) {
-                e.stopPropagation();
-                menu_options.classList.add('visible');
-            })
-        });
-        function editNote(e) {
-            
-            
-        }
-    </script>
+    <script src="%PUBLIC_URL%/jquery.min.js"></script>
+    <script src="%PUBLIC_URL%/index.js"></script>
   </body>
 </html>

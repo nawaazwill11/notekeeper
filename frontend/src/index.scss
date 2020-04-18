@@ -161,6 +161,19 @@ $nav-background: lightblue;
   display: flex;
   flex-direction: column;
 }
+#editor-close {
+  position: absolute;
+  top: 0px;
+  right: 15px;
+
+  button {
+    background-color: unset;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0;
+    cursor: pointer;
+  }
+}
 #note-title {
   // background-color: lightseagreen;
 
@@ -187,7 +200,9 @@ $nav-background: lightblue;
 
   button {
     background-color: unset;
-    border: none;
+    border: 0.5px solid lightgray;
+    padding: 5px 10px;
+    background-color: aliceblue;
     // box-shadow: 0 0 1px 1px lightgray;
   }
 }
@@ -206,8 +221,14 @@ $nav-background: lightblue;
   flex: 1;
 }
 .kp-block-layer {
+  border-bottom: 1px solid lightgray;
   input {
     width: 100%;
+  }
+}
+.kp-keypoint {
+  input {
+    font-weight: 500;
   }
 }
 .kp-block-action-container {
@@ -230,8 +251,27 @@ $nav-background: lightblue;
     padding: 2px;
   }
 }
-
-
+#editor-controls-container {
+  display: flex;
+  justify-content: flex-start;
+}
+#editor-controls {
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.editor-control-node button {
+  width: 75px;
+  padding: 10px;
+  border: none;
+  color: white;
+}
+#save {
+  background-color: #2196f3;
+}
+#discard {
+  background-color: red;
+}
 // Scrollbar 
 /* width */
 ::-webkit-scrollbar {
@@ -245,7 +285,7 @@ $nav-background: lightblue;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #red;
+  background: red;
 }
 
 /* Handle on hover */
