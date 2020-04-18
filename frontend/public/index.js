@@ -63,7 +63,7 @@ editor_closer.onclick = function (e) {
 const kp_block = {
     html: function (id) {
 
-    return (`<div class="kp-block" data-id=${id}>
+    return (`<div class="kp-block" id=${id}>
         <div class="kp-block-content">
         <div class="kp-block-layer">
             <div class="kp-keypoint">
@@ -71,7 +71,7 @@ const kp_block = {
             </div>
         </div>
         <div class="kp-block-layer">
-            <div class="description">
+            <div class="kp-desc">
             <input class="inp-flat" type="text" placeholder="Description">
             </div>
         </div>
@@ -95,7 +95,7 @@ let kp_id_seq = 0;
 
 const kp_adder = document.querySelector('#kp-adder button');
 kp_adder.onclick = function(e) {
-    const id = edited_note.id + '_kp_' + ++kp_id_seq; 
+    const id = nextKeypointID();
     edited_note.data.push({
         id: id,
         keypoint: '',
@@ -107,24 +107,68 @@ kp_adder.onclick = function(e) {
 };
 
 function kpBlockInit() {
-    const kp_block_action_list = document.querySelectorAll('.kp-block-action');
-    kp_block_action_list.forEach((block) => {
-        const remove = block.querySelector('.remove button');
-        remove.onclick =  function (e) {
-            const _block = this.closest('.kp-block');
-            const block_id = _block.id;
-            const index = edited_note.data.findIndex((kp) => kp.id === block_id);
-            edited_note.data.splice(index, 1);
-            console.log(edited_note);
-            _block.remove();
+    const kp_block_list = document.querySelectorAll('.kp-block');
+    kp_block_list.forEach((block) => {
+        const kp_block_action_list = document.querySelectorAll('.kp-block-action');
+        kp_block_action_list.forEach((ac_block) => {
+            const remove = ac_block.querySelector('.remove button');
+            remove.onclick =  function (e) {
+                const index = getNoteDataIndex(this);
+                edited_note.data.splice(index, 1);
+                getKPBlock(this).remove();
+            };
+
+            const copy = ac_block.querySelector('.copy button');
+            copy.onclick = function (e) {
+                const clone = getKPBlock(this).cloneNode(true);
+                clone.id = nextKeypointID();
+                document.querySelector('#kp-main').appendChild(clone);
+                const block_data = JSON.parse(JSON.stringify(edited_note.data[getNoteDataIndex(this)]));
+                block_data.id = clone.id;
+                edited_note.data.push(block_data);
+                console.log(edited_note);
+                kp_block.init();
+            };
+        });
+
+        const inp_keypoint = block.querySelector('.kp-keypoint input');
+        inp_keypoint.onkeyup =  function (e) {
+            const index = getNoteDataIndex(this);
+            edited_note.data[index].keypoint = this.value;
+            console.log(edited_note.data[index].keypoint);
         };
 
-        const copy = block.querySelector('.copy button');
-        copy.onclick = function (e) {
-            const clone = this.closest('.kp-block').cloneNode(true);
-            document.querySelector('#kp-main').appendChild(clone);
-            kp_block.init();
+        const inp_desc = block.querySelector('.kp-desc input');
+        inp_desc.onkeyup =  function (e) {
+            const index = getNoteDataIndex(this);
+            edited_note.data[index].desc = this.value;
+            console.log(edited_note.data[index].desc);
         };
-
+ 
     });
+
+    console.log('All elements initialized');
+
 }
+
+function getKPBlockID(element) {
+    return getKPBlock(element).id;
+}
+
+function getKPBlock(element) {
+    return element.closest('.kp-block');
+}
+
+function getNoteDataIndex(element) {
+    const block_id = getKPBlockID(element);
+    return edited_note.data.findIndex((kp) => kp.id === block_id);
+}
+
+function nextKeypointID() {
+    return edited_note.id + '_kp_' + ++kp_id_seq; 
+}
+
+const save = document.querySelector('#save');
+save.addEventListener('click', function (e) {
+    console.log(edited_note);
+});
