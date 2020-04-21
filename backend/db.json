@@ -53,7 +53,8 @@
                     "desc": "Description of Keypoint 4"
                 }
             ]
-        },{
+        },
+        {
             "id": "5",
             "title": "Title 5",
             "data": [

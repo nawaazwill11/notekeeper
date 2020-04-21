@@ -11,7 +11,7 @@ router.get('/hello', function(req, res, next) {
     res.end(JSON.stringify(response));
 });
 
-router.get('/load', function (req, res, next) {
+router.get('/loadData', function (req, res, next) {
     console.log('here');
     try {
         const db = fs.readFileSync('db.json', 'utf-8');
