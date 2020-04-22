@@ -1,6 +1,6 @@
 import React from 'react';
 import autoBind from 'auto-bind';
-import KeyPoints from './KeyPoints';
+import KeyPoint from './KeyPoint';
 import EditorEvents from './EditorEvents';
 
 
@@ -9,26 +9,45 @@ class Editor extends React.Component {
         super(props);
         this.note = this.props.data.note;
         this.events = new EditorEvents();
-        this.state = {
-            current_note: {
-                id: this.note.id,
-                title: this.note.title ? this.note.title : '',
-                data: this.note.data ? this.note.data : []
-            }
+        this.current_note = {
+            id: this.note.id,
+            title: this.note.title ? this.note.title : '',
+            data: this.note.data ? this.note.data : []
         }
         autoBind(this);
     }
-    updateNote(note) {
-        this.setState({
-            current_note: {
-                ...current_note,
-                title: note.title,
-                data: note.data
-            }
-        });
+
+    updateKeyPoint(data) {
+        const id = data.id;
+        const index = this.note.data.findIndex((data) => data.id === id);
+        this.note.data[index] = {
+            ...this.note.data[index],
+            ...data
+        };
+        console.log(this.note.data);
+    }
+
+    removeBlock(block_id) {
+        const index = this.note.data.findIndex((data) => data.id === block_id);
+        this.note.data.splice(index, 1);
+        console.log(this.note.data.length);
     }
 
     render() {
+        const note = this.note;
+        const key_points = note.data.map((kp) => {
+            return (
+                <KeyPoint
+                    key={kp.id}
+                    title={this.note.title}
+                    kp={kp}
+                    events= {{
+                        updateKeyPoint: this.updateKeyPoint,
+                        removeBlock: this.removeBlock
+                    }}
+                />
+            )
+        })
         return (
             <div id="editor-container">
                 <div id="editor-panel">
@@ -48,12 +67,7 @@ class Editor extends React.Component {
                             <div id="note-main">
                                 <div id="kp-container">
                                     <div id="kp-main">
-                                        <KeyPoints 
-                                            data={{
-                                                title: this.state.current_note.title,
-                                                keypoints: this.current_note.data}}
-                                            updateNote={this.updateNote}
-                                        />
+                                        {key_points}
                                     </div>
                                 </div>
                                 <div id="kp-adder">

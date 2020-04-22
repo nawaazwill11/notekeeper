@@ -1,21 +1,40 @@
 import React from 'react';
-import KeyPoints from './KeyPoints';
+import KeyPoint from './KeyPoint';
 import NoteEvents from './NoteEvents';
 
 class Note extends React.Component {
     constructor(props) {
         super(props);
-        this.data = this.props.data;
+        this.note = this.props.note;
         this.events = new NoteEvents();
+        // this.state = {
+        //     sequence: 0,
+        //     // data: this.props.data.data
+        // }
     }
-
+    // getNextSequence() {
+    //     this.setState({
+    //         sequence: this.state.sequence + 1
+    //     });
+    // }
     render() {
+        let count = 0;
+        const key_points = this.note.data.map((kp) => {
+            return(
+                <KeyPoint
+                    key={kp.id}
+                    type='key_only'
+                    kp={kp}
+                />
+            )
+        });
+
         return (
-            <div id={this.data.note.id} className="note" 
+            <div id={this.note.id} className="note" 
                 onMouseEnter={this.events.note.onMouseEnter}
                 onMouseLeave={this.events.note.onMouseLeave}
                 onClick={(e) => {
-                    this.events.note.onClick(e, this.data.note, this.props.toggleMode)
+                    this.events.note.onClick(e, this.note, this.props.toggleMode)
                 }}
                 >
                 <div className="note-content">
@@ -36,16 +55,12 @@ class Note extends React.Component {
                     </div>
                     <div className="note-content">
                         <div className="note-title">
-                            <b>{this.data.note.title}</b>
+                            <b>{this.note.title}</b>
                         </div>
                         <div className="note-main">
-                            <KeyPoints 
-                                data={{
-                                    note_id: this.data.note.id,
-                                    type: this.data.kp_type,
-                                    data: this.data.note.data
-                                }} 
-                            />
+                            <div className="key-points">
+                                {key_points}
+                            </div>
                         </div>
                     </div>
                 </div>

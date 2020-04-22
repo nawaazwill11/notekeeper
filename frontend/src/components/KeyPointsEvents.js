@@ -5,9 +5,18 @@ class KeyPointEvents {
         autoBind(this);
     }
     input = {
-        onKeyUp: (e) => {
+        change: (e, type, updateKeyPoint) => {
             const target = e.currentTarget;
-            console.log(target.value);
+            const data = {}
+            data['id'] = target.dataset.block_id;
+            data[type] = target.value;
+            updateKeyPoint(data);
+        }
+    }
+    actions = {
+        delete: (e, removeBlock) => {
+            const target = e.currentTarget;
+            removeBlock(target.dataset.block_id);
         }
     }
 }

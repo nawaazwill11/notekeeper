@@ -25,8 +25,8 @@ class NoteEvents {
             this.element.menu(e.currentTarget).classList.remove('visible');
             this.element.menuOptions(e.currentTarget).classList.remove('visible');
         },
-        onClick: (e, note_data, toggleMode) => {
-            toggleMode(note_data);
+        onClick: (e, note, toggleMode) => {
+            toggleMode(note);
         }
     }
     menu = {

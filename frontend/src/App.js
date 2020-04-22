@@ -17,13 +17,25 @@ class App extends React.Component {
         autoBind(this);
     }
     toggleMode(note={}) {
+        console.log(arguments);
         this.setState({
             mode: this.state.mode === 'view' ? 'edit': 'view',
             note: note
         })
         console.log('Mode', this.state.mode);
+        console.log('Note', this.state.note);
     }
     render() {
+        const notes = this.data.notes.map((note) => {
+            return (
+                <Note 
+                    key={"_" + note.id} 
+                    note={note}
+                    toggleMode={this.toggleMode.bind(this)}
+                />
+            );
+        });
+
         return (
             <div id="content">
                 <div id="control-container">
@@ -41,18 +53,7 @@ class App extends React.Component {
                         <input type="checkbox" />
                     </div>
                     <div id="notes-content">
-                        {this.data.notes.map((note) => {
-                            return (
-                                <Note 
-                                    key={"_" + note.id} 
-                                    data={{
-                                        note: note,
-                                        kp_type: 'key_only',
-                                    }} 
-                                    toggleMode={this.toggleMode.bind(this)}
-                                />
-                            )
-                        })}
+                        {notes}
                     </div>
                 </main>
                 {this.state.mode === 'edit' 
