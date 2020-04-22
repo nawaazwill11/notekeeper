@@ -3,24 +3,27 @@ import React from 'react';
 // import { Notes } from './components/notes';
 // import { Button } from 'antd';
 import Note from './components/Note';
+import Editor from './components/Editor';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.data = this.props.data;
         this.state = {
-            mode: 'view'
+            mode: 'view',
+            note_data: {}
         }
     }
-    toggleMode() {
+    toggleMode(note_data) {
         this.setState({
-            mode: this.state.mode === 'view' ? 'edit': 'view'
+            mode: this.state.mode === 'view' ? 'edit': 'view',
+            note_data: note_data
         })
         console.log('Mode', this.state.mode);
     }
     render() {
         return (
-            <div id="container">
+            <div id="content">
                 <div id="control-container">
                     <div id="control-content">
                         <div id="add-note" className="control">
@@ -49,6 +52,7 @@ class App extends React.Component {
                         })}
                     </div>
                 </main>
+                {this.state.mode === 'edit' ? <Editor data={{note_data: this.state.note_data}} /> : ''}
             </div>
         )
     }

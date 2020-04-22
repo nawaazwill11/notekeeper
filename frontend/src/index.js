@@ -15,7 +15,7 @@ window.onload = function () {
             if (data) {
                 ReactDOM.render(
                 <React.StrictMode>
-                    <App data={data}/>,
+                    <App data={data}/>
                 </React.StrictMode>,
                 document.getElementById('container')
                 );

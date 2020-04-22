@@ -1,5 +1,4 @@
 import autoBind from 'auto-bind';
-import Editor from './Editor';
 
 class NoteEvents {
     constructor() {
@@ -26,8 +25,8 @@ class NoteEvents {
             this.element.menu(e.currentTarget).classList.remove('visible');
             this.element.menuOptions(e.currentTarget).classList.remove('visible');
         },
-        onClick: (e, note) => {
-            console.log(e.currentTarget, note);
+        onClick: (e, note_data, toggleMode) => {
+            toggleMode(note_data);
         }
     }
     menu = {

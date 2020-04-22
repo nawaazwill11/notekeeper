@@ -20,7 +20,39 @@ class KeyPoints extends React.Component {
             })
         }
         else {
-            // ...
+            return this.data.keypoints.map((kp) => {
+                return (
+                    <div key={kp.id} className="kp-block" id={kp.id}>
+                        <div className="kp-block-content">
+                            <div className="kp-block-layer">
+                                <div className="kp-keypoint">
+                                    <input className="inp-flat" type="text" placeholder="Keypoint" 
+                                        defaultValue={kp.keypoint ? kp.keypoint : ''} 
+                                    />
+                                </div>
+                            </div>
+                            <div className="kp-block-layer">
+                                <div className="kp-desc">
+                                    <input className="inp-flat" type="text" placeholder="Description" 
+                                        defaultValue={kp.desc ? kp.desc : ''} 
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="kp-block-action-container">
+                            <div className="kp-block-action">
+                                <div className="action-node remove">
+                                    <button>-</button>
+                                </div>
+                                <div className="action-node copy">
+                                    <button>C</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })
+            
         }
     }
     render() {
