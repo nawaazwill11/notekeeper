@@ -14,7 +14,9 @@ class Note extends React.Component {
             <div id={this.data.note.id} className="note" 
                 onMouseEnter={this.events.note.onMouseEnter}
                 onMouseLeave={this.events.note.onMouseLeave}
-                onClick={(e) => this.events.note.onClick(e, this.data.note, this.props.toggleMode)}
+                onClick={(e) => {
+                    this.events.note.onClick(e, this.data.note, this.props.toggleMode)
+                }}
                 >
                 <div className="note-content">
                     <div className="note-menu" 
@@ -41,7 +43,7 @@ class Note extends React.Component {
                                 data={{
                                     note_id: this.data.note.id,
                                     type: this.data.kp_type,
-                                    keypoints: this.data.note.data
+                                    data: this.data.note.data
                                 }} 
                             />
                         </div>

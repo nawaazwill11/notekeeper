@@ -1,12 +1,17 @@
 import React from 'react';
+import KeyPointEvents from './KeyPointsEvents';
+import autoBind from 'auto-bind';
 
 class KeyPoints extends React.Component {
     constructor(props) {
         super(props);
-        this.data = this.props.data;
+        this.keypoints = this.props.data.keypoints;
         this.state = {
             sequence: 0,
+            data: this.props.data.data
         }
+        this.events = new KeyPointEvents();
+        autoBind(this);
     }
     getNextSequence() {
         this.setState({
@@ -15,19 +20,22 @@ class KeyPoints extends React.Component {
     }
     html() {
         if (this.data.type === 'key_only') {
-            return this.data.keypoints.map((kp) => {
+            return this.keypoints.map((kp) => {
                 return <div key={kp.id} id={kp.id} className="keypoint">{kp.keypoint}</div>
             })
         }
         else {
-            return this.data.keypoints.map((kp) => {
+            return this.keypoints.map((kp) => {
                 return (
                     <div key={kp.id} className="kp-block" id={kp.id}>
                         <div className="kp-block-content">
                             <div className="kp-block-layer">
                                 <div className="kp-keypoint">
-                                    <input className="inp-flat" type="text" placeholder="Keypoint" 
-                                        defaultValue={kp.keypoint ? kp.keypoint : ''} 
+                                    <input className="inp-flat" type="text" placeholder="Keypoint" data-type="keypoint"
+                                        defaultValue={kp.keypoint ? kp.keypoint : ''}
+                                        onKeyUp={(e) => {
+                                            this.events.input.onKeyUp(e, 'keypoint', this.props.updateNote)
+                                        }}
                                     />
                                 </div>
                             </div>

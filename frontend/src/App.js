@@ -1,4 +1,5 @@
 import React from 'react';
+import autoBind from 'auto-bind';
 // import  { Nav }  from './components/nav';
 // import { Notes } from './components/notes';
 // import { Button } from 'antd';
@@ -11,13 +12,14 @@ class App extends React.Component {
         this.data = this.props.data;
         this.state = {
             mode: 'view',
-            note_data: {}
+            note: {}
         }
+        autoBind(this);
     }
-    toggleMode(note_data) {
+    toggleMode(note={}) {
         this.setState({
             mode: this.state.mode === 'view' ? 'edit': 'view',
-            note_data: note_data
+            note: note
         })
         console.log('Mode', this.state.mode);
     }
@@ -42,7 +44,8 @@ class App extends React.Component {
                         {this.data.notes.map((note) => {
                             return (
                                 <Note 
-                                    key={"_" + note.id} data={{
+                                    key={"_" + note.id} 
+                                    data={{
                                         note: note,
                                         kp_type: 'key_only',
                                     }} 
@@ -52,7 +55,12 @@ class App extends React.Component {
                         })}
                     </div>
                 </main>
-                {this.state.mode === 'edit' ? <Editor data={{note_data: this.state.note_data}} /> : ''}
+                {this.state.mode === 'edit' 
+                    ? <Editor 
+                        data={{note: this.state.note}} 
+                        toggleMode={this.toggleMode} /> 
+                    : ''
+                }
             </div>
         )
     }
