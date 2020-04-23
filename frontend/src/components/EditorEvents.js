@@ -4,10 +4,13 @@ class EditorsEvents {
     constructor() {
         autoBind(this);
     }
-    close = {
-        onClick: (e, note, toggleMode) => {
-            const target = e.currentTarget;
+    actions = {
+        closeEditor: (e, note, toggleMode) => {
+            // const target = e.currentTarget;
             toggleMode();
+        },
+        addNewBlock: (e, addBlock) => {
+            addBlock();
         }
     }
 }

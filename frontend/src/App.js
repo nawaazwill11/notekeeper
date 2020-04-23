@@ -1,8 +1,5 @@
 import React from 'react';
 import autoBind from 'auto-bind';
-// import  { Nav }  from './components/nav';
-// import { Notes } from './components/notes';
-// import { Button } from 'antd';
 import Note from './components/Note';
 import Editor from './components/Editor';
 
@@ -26,7 +23,6 @@ class App extends React.Component {
         console.log('Note', this.state.note);
     }
     render() {
-        
         const notes = this.data.notes.map((note) => {
             return (
                 <Note 

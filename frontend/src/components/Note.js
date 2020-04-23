@@ -18,7 +18,6 @@ class Note extends React.Component {
     //     });
     // }
     render() {
-        let count = 0;
         const key_points = this.note.data.map((kp) => {
             return(
                 <KeyPoint

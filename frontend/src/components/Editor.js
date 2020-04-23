@@ -20,12 +20,10 @@ class Editor extends React.Component {
         autoBind(this);
     }
 
-    updateState(changes) {
+    updateState() {
         this.setState({
-            ...this.state.note,
-            ...changes
+           note: this.current_note
         })
-        console.log(this.state)
     }
     
     updateKeyPoint(data) {
@@ -35,16 +33,31 @@ class Editor extends React.Component {
             ...this.current_note.data[index],
             ...data
         };
-        console.log(this.current_note.data);
     }
 
     removeBlock(block_id) {
         const index = this.current_note.data.findIndex((data) => data.id === block_id);
         this.current_note.data.splice(index, 1);
-        console.log(this.current_note.data.length);
-        this.updateState(this.current_note)
+        this.updateState();
     }
 
+    addBlock() {
+        this.current_note.data.push({
+            id: this.nextSequence(),
+            keypoint: '',
+            desc: ''
+        });
+        this.updateState();
+    }
+
+    nextSequence() {
+        if (!this.kp_sequence_id) {
+            let last_kp = this.current_note.data.slice(-1)[0];
+            if (last_kp) this.kp_sequence_id = last_kp.id.slice(last_kp.id.lastIndexOf('_') + 1, );
+            else this.kp_sequence_id = 0
+        }
+        return this.current_note.id + '_kp_' + ++this.kp_sequence_id;
+    }
 
     render() {
         const note = this.current_note;
@@ -60,7 +73,8 @@ class Editor extends React.Component {
                     }}
                 />
             )
-        })
+        });
+
         return (
             <div id="editor-container">
                 <div id="editor-panel">
@@ -68,7 +82,7 @@ class Editor extends React.Component {
                         <div id="editor-close">
                             <button 
                                 onClick={(e) => {
-                                    this.events.close.onClick(e, this.current_note, this.props.toggleMode)
+                                    this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
                                 }}>
                                 x
                             </button>
@@ -84,11 +98,15 @@ class Editor extends React.Component {
                                     </div>
                                 </div>
                                 <div id="kp-adder">
-                                    <button>Add keypoint</button>
+                                    <button 
+                                        onClick={(e) => {
+                                            this.events.actions.addNewBlock(e, this.addBlock)}}>
+                                        Add keypoint
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div id="editor-controls-container">
+                        {/* <div id="editor-controls-container">
                             <div id="editor-controls-content">
                                 <div id="editor-controls">
                                     <div className="editor-control-node">
@@ -99,7 +117,7 @@ class Editor extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
