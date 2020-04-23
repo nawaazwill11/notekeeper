@@ -17,7 +17,7 @@ class App extends React.Component {
         autoBind(this);
     }
     toggleMode(note={}) {
-        console.log(arguments);
+        console.log(note);
         this.setState({
             mode: this.state.mode === 'view' ? 'edit': 'view',
             note: note
@@ -26,12 +26,13 @@ class App extends React.Component {
         console.log('Note', this.state.note);
     }
     render() {
+        
         const notes = this.data.notes.map((note) => {
             return (
                 <Note 
                     key={"_" + note.id} 
                     note={note}
-                    toggleMode={this.toggleMode.bind(this)}
+                    toggleMode={this.toggleMode}
                 />
             );
         });

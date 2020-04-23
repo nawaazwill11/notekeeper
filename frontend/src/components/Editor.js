@@ -14,32 +14,45 @@ class Editor extends React.Component {
             title: this.note.title ? this.note.title : '',
             data: this.note.data ? this.note.data : []
         }
+        this.state = {
+            note: this.current_note
+        }
         autoBind(this);
     }
 
+    updateState(changes) {
+        this.setState({
+            ...this.state.note,
+            ...changes
+        })
+        console.log(this.state)
+    }
+    
     updateKeyPoint(data) {
         const id = data.id;
-        const index = this.note.data.findIndex((data) => data.id === id);
-        this.note.data[index] = {
-            ...this.note.data[index],
+        const index = this.current_note.data.findIndex((data) => data.id === id);
+        this.current_note.data[index] = {
+            ...this.current_note.data[index],
             ...data
         };
-        console.log(this.note.data);
+        console.log(this.current_note.data);
     }
 
     removeBlock(block_id) {
-        const index = this.note.data.findIndex((data) => data.id === block_id);
-        this.note.data.splice(index, 1);
-        console.log(this.note.data.length);
+        const index = this.current_note.data.findIndex((data) => data.id === block_id);
+        this.current_note.data.splice(index, 1);
+        console.log(this.current_note.data.length);
+        this.updateState(this.current_note)
     }
 
+
     render() {
-        const note = this.note;
+        const note = this.current_note;
         const key_points = note.data.map((kp) => {
             return (
                 <KeyPoint
                     key={kp.id}
-                    title={this.note.title}
+                    title={note.title}
                     kp={kp}
                     events= {{
                         updateKeyPoint: this.updateKeyPoint,
@@ -55,13 +68,13 @@ class Editor extends React.Component {
                         <div id="editor-close">
                             <button 
                                 onClick={(e) => {
-                                    this.events.close.onClick(e, this.props.toggleMode)
+                                    this.events.close.onClick(e, this.current_note, this.props.toggleMode)
                                 }}>
                                 x
                             </button>
                         </div>
                         <div id="note-title">
-                            <input type="text" placeholder="Title" defaultValue={this.note.title} />
+                            <input type="text" placeholder="Title" defaultValue={note.title} />
                         </div>
                         <div id="note-main-container">
                             <div id="note-main">

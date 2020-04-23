@@ -5,7 +5,7 @@ class EditorsEvents {
         autoBind(this);
     }
     close = {
-        onClick: (e, toggleMode) => {
+        onClick: (e, note, toggleMode) => {
             const target = e.currentTarget;
             toggleMode();
         }

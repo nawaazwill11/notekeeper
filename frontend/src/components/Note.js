@@ -29,6 +29,7 @@ class Note extends React.Component {
             )
         });
 
+        // console.log('Note render');
         return (
             <div id={this.note.id} className="note" 
                 onMouseEnter={this.events.note.onMouseEnter}
