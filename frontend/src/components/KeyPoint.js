@@ -12,7 +12,7 @@ class KeyPoint extends React.Component {
     render() {
         const kp = this.props.kp;
         if (this.props.type === 'key_only') {
-            return <div id={kp.id} className="keypoint">{kp.keypoint}</div>
+            return <div data-id={kp.id} className="keypoint">{kp.keypoint}</div>
         }
         else {
             return (
@@ -44,13 +44,16 @@ class KeyPoint extends React.Component {
                             <div className="action-node remove">
                                 <button 
                                     data-block_id={kp.id}
-                                    onClick={(e) => { this.events.actions.delete(e, this.props.events.removeBlock) }}
-                                >
+                                    onClick={(e) => { this.events.actions.delete(e, this.props.events.removeBlock) }}>
                                     -
                                 </button>
                             </div>
                             <div className="action-node copy">
-                                <button>C</button>
+                                <button 
+                                    data-block_id={kp.id}
+                                    onClick={(e) => { this.events.actions.duplicate(e, this.props.events.duplicateBlock) }}>
+                                    C
+                                </button>
                             </div>
                         </div>
                     </div>

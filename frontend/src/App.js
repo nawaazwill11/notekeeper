@@ -3,6 +3,7 @@ import autoBind from 'auto-bind';
 import Note from './components/Note';
 import Editor from './components/Editor';
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -38,7 +39,10 @@ class App extends React.Component {
                 <div id="control-container">
                     <div id="control-content">
                         <div id="add-note" className="control">
-                            <button className="btn">New note</button>
+                            <button className="btn"
+                                onClick={() => this.toggleMode()}>
+                                New note
+                            </button>
                         </div>
                         <div id="delete-note" className="control">
                             <button className="btn">Delete notes</button>

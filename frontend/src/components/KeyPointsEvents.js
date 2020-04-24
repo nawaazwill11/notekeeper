@@ -18,6 +18,16 @@ class KeyPointEvents {
         delete: (e, removeBlock) => {
             const target = e.currentTarget;
             removeBlock(target.dataset.block_id);
+        },
+        duplicate: (e, duplicateBlock) => {
+            const target = e.currentTarget;
+            const block = document.querySelector(`#${target.dataset.block_id}`);
+            const keypoint = block.querySelector('.kp-keypoint input')
+            const desc = block.querySelector('.kp-desc input')
+            duplicateBlock({
+                keypoint: keypoint.value,
+                desc: desc.value
+            })
         }
     }
 }

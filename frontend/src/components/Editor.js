@@ -41,11 +41,11 @@ class Editor extends React.Component {
         this.updateState();
     }
 
-    addBlock() {
+    addBlock(kp={}) {
         this.current_note.data.push({
             id: this.nextSequence(),
-            keypoint: '',
-            desc: ''
+            keypoint: kp.keypoint ? kp.keypoint : '',
+            desc: kp.desc ? kp.desc : ''
         });
         this.updateState();
     }
@@ -56,7 +56,11 @@ class Editor extends React.Component {
             if (last_kp) this.kp_sequence_id = last_kp.id.slice(last_kp.id.lastIndexOf('_') + 1, );
             else this.kp_sequence_id = 0
         }
-        return this.current_note.id + '_kp_' + ++this.kp_sequence_id;
+        return `kp_${this.current_note.id}_${++this.kp_sequence_id}`;
+    }
+
+    duplicateBlock(kp) {
+        this.addBlock(kp);
     }
 
     render() {
@@ -69,7 +73,8 @@ class Editor extends React.Component {
                     kp={kp}
                     events= {{
                         updateKeyPoint: this.updateKeyPoint,
-                        removeBlock: this.removeBlock
+                        removeBlock: this.removeBlock,
+                        duplicateBlock: this.duplicateBlock
                     }}
                 />
             )
