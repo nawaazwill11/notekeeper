@@ -6,11 +6,18 @@ class EditorsEvents {
     }
     actions = {
         closeEditor: (e, note, toggleMode) => {
-            // const target = e.currentTarget;
-            toggleMode();
+            console.log('Note at close', note);
+            toggleMode(note);
         },
         addNewBlock: (e, addBlock) => {
             addBlock();
+        }
+    }
+    title = {
+        keyUp: (e, updateTitle) => {
+            const target = e.currentTarget;
+            console.log(target.value);
+            updateTitle(target.value);
         }
     }
 }

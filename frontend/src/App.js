@@ -14,18 +14,32 @@ class App extends React.Component {
         }
         autoBind(this);
     }
-    toggleMode(note={}) {
-        console.log(note);
+    toggleMode(note) {
+        console.log('Note in toggle: data', this.data.notes[0]);
+        console.log('Note in toggle', note);
+        const hasNote = this.data.notes.find((_note) => _note.id === note.id);
+        if (!hasNote) this.data.notes.push(note);
+        // else thi
+
         this.setState({
             mode: this.state.mode === 'view' ? 'edit': 'view',
             note: note
         }, function () {
-            if (this.state.mode === 'view')
+            if (this.state.mode === 'view'){
+                console.log('At write', this.state.note);
                 this.props.writer(this.data);
-                    // .then((data) => console.log(data));
+            }
         });
         console.log('Mode', this.state.mode);
         console.log('Note', this.state.note);
+    }
+    nextSequence() {
+        if (this.data.notes.length) {
+            const last_note = this.data.notes[this.data.notes.length - 1];
+            console.log('last note', last_note.id);
+            return last_note.id + 1;
+        }
+        return 1;
     }
     render() {
         const notes = this.data.notes.map((note) => {
@@ -46,7 +60,10 @@ class App extends React.Component {
                     <div id="control-content">
                         <div id="add-note" className="control">
                             <button className="btn"
-                                onClick={() => this.toggleMode()}>
+                                onClick={() => {
+                                    const id = this.nextSequence();
+                                    this.toggleMode({id: id, title: '', data: []})
+                                }}>
                                 New note
                             </button>
                         </div>

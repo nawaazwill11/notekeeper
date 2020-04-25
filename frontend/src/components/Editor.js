@@ -7,13 +7,9 @@ import EditorEvents from './EditorEvents';
 class Editor extends React.Component {
     constructor(props) {
         super(props);
-        this.note = this.props.data.note;
+        // this.note = this.props.data.note;
         this.events = new EditorEvents();
-        this.current_note = {
-            id: this.note.id,
-            title: this.note.title ? this.note.title : '',
-            data: this.note.data ? this.note.data : []
-        }
+        this.current_note = this.props.data.note;
         this.state = {
             note: this.current_note
         }
@@ -24,8 +20,12 @@ class Editor extends React.Component {
         this.setState({
            note: this.current_note
         })
+
     }
-    
+    updateTitle(title) {
+        this.current_note.title = title;
+        this.updateState(this.current_note);
+    }
     updateKeyPoint(data) {
         const id = data.id;
         const index = this.current_note.data.findIndex((data) => data.id === id);
@@ -85,18 +85,22 @@ class Editor extends React.Component {
             <div id="editor-container">
                 <div id="editor-panel">
                     <div id="editor-content">
-                        <div id="editor-close">
+                        <div data-note={this.current_note.id}></div>
+                        {/* <div id="editor-close">
                             <button 
                                 onClick={(e) => {
                                     this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
                                 }}>
                                 x
                             </button>
-                        </div>
-                        <div id="note-title">
-                            <input type="text" placeholder="Title" defaultValue={note.title} />
-                        </div>
+                        </div> */}
                         <div id="note-main-container">
+                            <div id="note-title">
+                                <input type="text" placeholder="Title" defaultValue={note.title} 
+                                    onKeyUp={(e) => {
+                                        this.events.title.keyUp(e, this.updateTitle)
+                                    }}/>
+                            </div>
                             <div id="note-main">
                                 <div id="kp-container">
                                     <div id="kp-main">
@@ -112,18 +116,22 @@ class Editor extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        {/* <div id="editor-controls-container">
+                        <div id="editor-controls-container">
                             <div id="editor-controls-content">
                                 <div id="editor-controls">
                                     <div className="editor-control-node">
-                                        <button id="save">Save</button>
+                                        <button id="save" onClick={(e) => {
+                                            this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
+                                            }}>
+                                            Save
+                                        </button>
                                     </div>
-                                    <div className="editor-control-node">
+                                    {/* <div className="editor-control-node">
                                         <button id="discard">Discard</button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>

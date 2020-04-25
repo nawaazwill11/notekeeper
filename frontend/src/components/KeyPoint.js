@@ -21,7 +21,7 @@ class KeyPoint extends React.Component {
                         <div className="kp-block-layer">
                             <div className="kp-keypoint">
                                 <input className="inp-flat" type="text" placeholder="Keypoint" data-type="keypoint" data-block_id={kp.id}
-                                    defaultValue={kp.keypoint ? kp.keypoint : ''}
+                                    defaultValue={kp.keypoint}
                                     onKeyUp={(e) => {
                                         this.events.input.change(e, 'keypoint', this.props.events.updateKeyPoint)
                                     }}
