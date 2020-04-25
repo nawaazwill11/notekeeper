@@ -2,12 +2,12 @@
     "notes": [
         {
             "id": 1,
-            "title": "Note 1",
+            "title": "Sample",
             "data": [
                 {
                     "id": "kp_1_1",
-                    "keypoint": "Keypoint of note 1",
-                    "desc": "Desc of note 1"
+                    "keypoint": "Keypoint of a sample note",
+                    "desc": "Description of a sample note"
                 }
             ]
         }
