@@ -33,13 +33,18 @@ $nav-background: lightblue;
   list-style-type: none;
   display: flex;
 }
-.nav-item::before {
-  content: '/';
-  margin: 0 5px;
-  color: $color;
-}
-.nav-item:first-child::before {
-  content: '';
+.nav-item {
+  font-size: 1.5rem;
+  
+  ::before {
+    content: '/';
+    margin: 0 5px;
+    color: $color;
+  }
+  
+  :first-child::before {
+    content: '';
+  }
 }
 #container {
   width: 90%;
