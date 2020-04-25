@@ -19,7 +19,11 @@ class App extends React.Component {
         this.setState({
             mode: this.state.mode === 'view' ? 'edit': 'view',
             note: note
-        })
+        }, function () {
+            if (this.state.mode === 'view')
+                this.props.writer(this.data);
+                    // .then((data) => console.log(data));
+        });
         console.log('Mode', this.state.mode);
         console.log('Note', this.state.note);
     }
@@ -29,7 +33,9 @@ class App extends React.Component {
                 <Note 
                     key={"_" + note.id} 
                     note={note}
-                    toggleMode={this.toggleMode}
+                    events={{
+                        toggleMode: this.toggleMode
+                    }}
                 />
             );
         });

@@ -7,16 +7,9 @@ class Note extends React.Component {
         super(props);
         this.note = this.props.note;
         this.events = new NoteEvents();
-        // this.state = {
-        //     sequence: 0,
-        //     // data: this.props.data.data
-        // }
+
     }
-    // getNextSequence() {
-    //     this.setState({
-    //         sequence: this.state.sequence + 1
-    //     });
-    // }
+
     render() {
         const key_points = this.note.data.map((kp) => {
             return(
@@ -28,25 +21,24 @@ class Note extends React.Component {
             )
         });
 
-        // console.log('Note render');
         return (
             <div id={this.note.id} className="note" 
                 onMouseEnter={this.events.note.onMouseEnter}
                 onMouseLeave={this.events.note.onMouseLeave}
                 onClick={(e) => {
-                    this.events.note.onClick(e, this.note, this.props.toggleMode)
+                    this.events.note.onClick(e, this.note, this.props.events.toggleMode)
                 }}
                 >
                 <div className="note-content">
                     <div className="note-menu" 
-                        onClick={this.events.menu.menu.onClick}>
+                        onClick={this.events.options.menu.open}>
                         <div className="note-menu-img">
                             <img src="menu.svg" alt="menu" />
                         </div>
                         <div className="note-menu-list-container">
                             <ul className="note-menu-list">
                                 <li className="note-menu-item" 
-                                    onClick={this.events.menu.menuItem.onClick}>
+                                    onClick={(e) => this.events.options.menuItem.edit(e, this.note, this.props.events.toggleMode)}>
                                     Edit</li>
                                 <li className="note-menu-item">Delete</li>
                                 <li className="note-menu-item">Archive</li>

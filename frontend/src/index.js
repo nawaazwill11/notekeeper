@@ -6,16 +6,22 @@ import * as serviceWorker from './serviceWorker';
 import Utility from './components/Utility';
 import $ from 'jquery';
 
+function writer(data) {
+    console.log('writer', data)
+    new Utility().request.post('http://localhost:5000/api/writeData', data)
+        .then((response) => console.log(response));
+}
+
 window.onload = function () {
     const util = new Utility();
-    
-    util.ajax.get('http://localhost:5000/api/loadData')
-        .then((data) => {
-            data = util.parseData.json(data);
+
+    util.request.get('http://localhost:5000/api/loadData')
+        .then((response) => {
+            const data = util.parseData.json(response.data);
             if (data) {
                 ReactDOM.render(
                 <React.StrictMode>
-                    <App data={data}/>
+                    <App data={data} writer={writer}/>
                 </React.StrictMode>,
                 document.getElementById('container')
                 );

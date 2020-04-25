@@ -29,17 +29,16 @@ class NoteEvents {
             toggleMode(note);
         }
     }
-    menu = {
+    options = {
         menu: {
-            onClick: (e) => {
+            open: (e) => {
                 e.stopPropagation();
                 this.element.menuOptions(e.currentTarget).classList.add('visible');
             }
         },
         menuItem: {
-            onClick: (e) => {
-                // this.element.
-                console.log();
+            edit: (e, note, toggleMode) => {
+                toggleMode(note);
             }
         }
     }

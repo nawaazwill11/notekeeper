@@ -33,6 +33,7 @@ class Editor extends React.Component {
             ...this.current_note.data[index],
             ...data
         };
+        this.updateState(this.current_note);
     }
 
     removeBlock(block_id) {

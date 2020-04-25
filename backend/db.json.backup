@@ -5,6 +5,16 @@
             "title": "Title 1",
             "data": [
                 {
+                    "id": "kp_1_1",
+                    "keypoint": "Keypoint 1",
+                    "desc": "Description of Keypoint 1"
+                },
+                {
+                    "id": "kp_1_2",
+                    "keypoint": "Keypoint 1",
+                    "desc": "Description of Keypoint 1"
+                },
+                {
                     "id": "kp_1_3",
                     "keypoint": "Keypoint 1",
                     "desc": "Description of Keypoint 1"
