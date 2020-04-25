@@ -13,7 +13,9 @@ echo ""
 
 echo "Installing backend..."
 cd ../backend && npm install
+echo '{"notes":[{"id":1,"title":"Sample","data":[{"id":"kp_1_1","keypoint":"Keypoint of a sample note","desc":"Description of a sample note"}]}]}' > db.json
 echo "Backend installed!"
+echo ""
 
 echo ""
 
@@ -21,7 +23,5 @@ echo "App is ready to begin"
 echo "To start using the app, follow:"
 echo "  1. Start frontend: cd frontend && npm start"
 echo "  2. (New terminal)Start backend: cd backend && npm start"
-
-echo ""
 
 echo "Installation complete!"
