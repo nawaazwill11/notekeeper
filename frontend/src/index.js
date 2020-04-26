@@ -41,7 +41,7 @@ function loadApp(App) {
         <React.StrictMode>
             <Layout>
                 <Header>Header</Header>
-                <Content>{App}</Content>
+                <Content>{ App }</Content>
                 <Footer>Footer</Footer>
             </Layout>
         </React.StrictMode>,
