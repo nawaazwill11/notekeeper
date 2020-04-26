@@ -29,17 +29,16 @@ class NoteEvents {
             toggleMode(null, note);
         }
     }
-    options = {
-        menu: {
-            open: (e) => {
-                e.stopPropagation();
-                this.element.menuOptions(e.currentTarget).classList.add('visible');
-            }
+    menu = {
+        open: (e) => {
+            e.stopPropagation();
+            this.element.menuOptions(e.currentTarget).classList.add('visible');
         },
-        menuItem: {
-            edit: (e, note, toggleMode) => {
-                toggleMode(null, note);
-            }
+        edit: (e, note, toggleMode) => {
+            toggleMode(null, note);
+        },
+        delete: (e, note, toggleMode) => {
+            toggleMode('delete', note);
         }
     }
 

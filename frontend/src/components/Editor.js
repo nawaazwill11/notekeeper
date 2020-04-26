@@ -52,12 +52,7 @@ class Editor extends React.Component {
     }
 
     nextSequence() {
-        if (!this.kp_sequence_id) {
-            let last_kp = this.current_note.data.slice(-1)[0];
-            if (last_kp) this.kp_sequence_id = last_kp.id.slice(last_kp.id.lastIndexOf('_') + 1, );
-            else this.kp_sequence_id = 0
-        }
-        return `kp_${this.current_note.id}_${++this.kp_sequence_id}`;
+      return `kp_${this.current_note.id}_${++this.current_note.kp_id_seq}`;
     }
 
     duplicateBlock(kp) {

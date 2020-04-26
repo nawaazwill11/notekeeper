@@ -10,7 +10,7 @@ class KeyPointEvents {
             const data = {}
             data['id'] = target.dataset.block_id;
             data[type] = target.value;
-            console.log(data);
+            // console.log(data);
             updateKeyPoint(data);
         }
     }

@@ -31,16 +31,18 @@ class Note extends React.Component {
                 >
                 <div className="note-content">
                     <div className="note-menu" 
-                        onClick={this.events.options.menu.open}>
+                        onClick={this.events.menu.open}>
                         <div className="note-menu-img">
                             <img src="menu.svg" alt="menu" />
                         </div>
                         <div className="note-menu-list-container">
                             <ul className="note-menu-list">
                                 <li className="note-menu-item" 
-                                    onClick={(e) => this.events.options.menuItem.edit(e, this.note, this.props.events.toggleMode)}>
+                                    onClick={(e) => this.events.menu.edit(e, this.note, this.props.events.toggleMode)}>
                                     Edit</li>
-                                <li className="note-menu-item">Delete</li>
+                                <li className="note-menu-item"
+                                    onClick={(e) => this.events.menu.delete(e, this.note, this.props.events.toggleMode)}
+                                    >Delete</li>
                                 <li className="note-menu-item">Archive</li>
                             </ul>
                         </div>

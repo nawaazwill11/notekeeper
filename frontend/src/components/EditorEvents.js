@@ -9,18 +9,18 @@ class EditorsEvents {
             addBlock();
         },
         save: (e, note, toggleMode) => {
-            console.log('Note at save', note);
+            // console.log('Note at save', note);
             toggleMode('save', note);
         },
         close: (e, note, toggleMode) => {
-            console.log('Note changes discarded', note);
+            // console.log('Note changes discarded', note);
             toggleMode(null, note);
         }
     }
     title = {
         keyUp: (e, updateTitle) => {
             const target = e.currentTarget;
-            console.log(target.value);
+            // console.log(target.value);
             updateTitle(target.value);
         }
     }
