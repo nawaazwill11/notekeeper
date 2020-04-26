@@ -4,6 +4,8 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Utility from './components/Utility';
+import { Layout } from 'antd';
+
 
 function writer(data) {
     console.log('writer', data)
@@ -32,12 +34,18 @@ window.onload = function () {
     
 }
 
+const { Header, Content, Footer } = Layout;
+
 function loadApp(App) {
     ReactDOM.render(
         <React.StrictMode>
-            {App}
+            <Layout>
+                <Header>Header</Header>
+                <Content>{App}</Content>
+                <Footer>Footer</Footer>
+            </Layout>
         </React.StrictMode>,
-        document.getElementById('container')
+        document.getElementById('root')
     );
 }
 
