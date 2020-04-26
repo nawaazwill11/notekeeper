@@ -2,12 +2,12 @@ import React from 'react';
 import autoBind from 'auto-bind';
 import KeyPoint from './KeyPoint';
 import EditorEvents from './EditorEvents';
-
+import _ from 'lodash';
 
 class Editor extends React.Component {
     constructor(props) {
         super(props);
-        // this.note = this.props.data.note;
+        this.backup_note = _.cloneDeep(this.props.data.note);
         this.events = new EditorEvents();
         this.current_note = this.props.data.note;
         this.state = {
@@ -121,14 +121,19 @@ class Editor extends React.Component {
                                 <div id="editor-controls">
                                     <div className="editor-control-node">
                                         <button id="save" onClick={(e) => {
-                                            this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
+                                            this.events.actions.save(e, this.current_note, this.props.toggleMode)
                                             }}>
                                             Save
                                         </button>
                                     </div>
-                                    {/* <div className="editor-control-node">
-                                        <button id="discard">Discard</button>
-                                    </div> */}
+                                    <div className="editor-control-node">
+                                        <button id="discard"
+                                            onClick={(e) => {
+                                                this.events.actions.close(e, this.backup_note, this.props.toggleMode)
+                                            }}>
+                                            Discard
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

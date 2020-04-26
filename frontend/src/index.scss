@@ -17,6 +17,9 @@ code {
 $color: red;
 $nav-background: lightblue;
 
+#load-error {
+
+}
 
 #nav-container {
   background-color: $nav-background;
@@ -260,9 +263,12 @@ $nav-background: lightblue;
   justify-content: flex-end;
 }
 #editor-controls {
-  width: 100px;
+  width: 180px;
   display: flex;
   justify-content: flex-start;
+}
+.editor-control-node {
+  margin-right: 10px;
 }
 .editor-control-node button {
   width: 75px;

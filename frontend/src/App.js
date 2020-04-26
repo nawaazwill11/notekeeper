@@ -2,7 +2,7 @@ import React from 'react';
 import autoBind from 'auto-bind';
 import Note from './components/Note';
 import Editor from './components/Editor';
-
+import _ from 'lodash';
 
 class App extends React.Component {
     constructor(props) {
@@ -14,25 +14,36 @@ class App extends React.Component {
         }
         autoBind(this);
     }
-    toggleMode(note) {
-        console.log('Note in toggle: data', this.data.notes[0]);
-        console.log('Note in toggle', note);
-        const hasNote = this.data.notes.find((_note) => _note.id === note.id);
-        if (!hasNote) this.data.notes.push(note);
-        // else thi
-
+    toggleMode(type, note={}) {
+        if (Object.keys(note).length) {
+            if (type === 'save') {
+                console.log('Note in toggle: data', this.data.notes[0]);
+                console.log('Note in toggle', note);
+                const hasNote = this.data.notes.find((_note) => _note.id === note.id);
+                if (!hasNote) this.data.notes.push(note);
+            }
+            else if (type === 'delete') {
+                const noteIndex = _.remove(this.data.notes, (_note) => _note.id === note.id);
+            }
+        }
+        
         this.setState({
             mode: this.state.mode === 'view' ? 'edit': 'view',
             note: note
         }, function () {
             if (this.state.mode === 'view'){
-                console.log('At write', this.state.note);
                 this.props.writer(this.data);
             }
         });
         console.log('Mode', this.state.mode);
         console.log('Note', this.state.note);
     }
+    // updateState(changes) {
+    //     this.setState({
+    //         ...this.state,
+    //         ...changes
+    //     })
+    // }
     nextSequence() {
         if (this.data.notes.length) {
             const last_note = this.data.notes[this.data.notes.length - 1];
@@ -42,6 +53,7 @@ class App extends React.Component {
         return 1;
     }
     render() {
+        console.log('App render', this.data);
         const notes = this.data.notes.map((note) => {
             return (
                 <Note 
@@ -62,7 +74,7 @@ class App extends React.Component {
                             <button className="btn"
                                 onClick={() => {
                                     const id = this.nextSequence();
-                                    this.toggleMode({id: id, title: '', data: []})
+                                    this.toggleMode(null, {id: id, title: '', data: []})
                                 }}>
                                 New note
                             </button>

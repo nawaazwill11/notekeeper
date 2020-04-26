@@ -5,12 +5,16 @@ class EditorsEvents {
         autoBind(this);
     }
     actions = {
-        closeEditor: (e, note, toggleMode) => {
-            console.log('Note at close', note);
-            toggleMode(note);
-        },
         addNewBlock: (e, addBlock) => {
             addBlock();
+        },
+        save: (e, note, toggleMode) => {
+            console.log('Note at save', note);
+            toggleMode('save', note);
+        },
+        close: (e, note, toggleMode) => {
+            console.log('Note changes discarded', note);
+            toggleMode(null, note);
         }
     }
     title = {

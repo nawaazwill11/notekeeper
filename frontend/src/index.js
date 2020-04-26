@@ -4,7 +4,6 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Utility from './components/Utility';
-import $ from 'jquery';
 
 function writer(data) {
     console.log('writer', data)
@@ -19,27 +18,33 @@ window.onload = function () {
         .then((response) => {
             const data = util.parseData.json(response.data);
             if (data) {
-                ReactDOM.render(
-                <React.StrictMode>
-                    <App data={data} writer={writer}/>
-                </React.StrictMode>,
-                document.getElementById('container')
-                );
+                loadApp(<App data={data} writer={writer}/>);
             } 
             else {
-                console.log("Faulty data");
-                showError();
+                loadApp(<LoadError error="Faulty data" />);
             }
         })
         .catch((error) => {
             console.error(error);
-            showError();
+            loadApp(<LoadError error="500 - Server Error Occurred" />);
+            
         })
     
 }
 
-function showError() {
-    $('body').html(`<h1>${'500 - Server error occured'}</h1>`);
+function loadApp(App) {
+    ReactDOM.render(
+        <React.StrictMode>
+            {App}
+        </React.StrictMode>,
+        document.getElementById('container')
+    );
+}
+
+function LoadError(props) {
+    return (
+        <h1>{props.error}</h1>
+    )
 }
 
 // If you want your app to work offline and load faster, you can change
