@@ -20,9 +20,10 @@ class App extends React.Component {
         if (Object.keys(note).length) {
             if (type === 'save') {
                 // console.log('Note in toggle: data', this.data.notes[0]);
-                // console.log('Note in toggle', note);
-                const hasNote = this.data.notes.find((_note) => _note.id === note.id);
-                if (!hasNote) this.data.notes.push(note);
+                // console.log('Note in toggle', note.id);
+                const noteIndex = this.data.notes.findIndex((_note) => _note.id === note.id);
+                if (noteIndex === -1) this.data.notes.push(note);
+                else this.data.notes[noteIndex] = note;
             }
             else if (type === 'delete') {
                 _.remove(this.data.notes, (_note) => _note.id === note.id);
@@ -37,14 +38,7 @@ class App extends React.Component {
     }
 
     updateState(mode, note) {
-        // this.setState({
-        //     ...this.state,
-        //     ...changes
-        // }, function () {
-        //     console.log('Mode', this.state.mode);
-        //     console.log('Note', this.state.note);
-        // })
-        
+
         this.setState({
             mode: mode,
             note: note
@@ -69,6 +63,7 @@ class App extends React.Component {
     render() {
         // console.log('App render', this.data);
         const notes = this.data.notes.map((note) => {
+            // console.log('Inside note mapping', note);
             return (
                 <Note 
                     key={"_" + note.id} 
@@ -92,9 +87,6 @@ class App extends React.Component {
                                 }}>
                                 New note
                             </button>
-                        </div>
-                        <div id="delete-note" className="control">
-                            <button className="btn">Delete notes</button>
                         </div>
                     </div>
                 </div>

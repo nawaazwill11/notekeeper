@@ -7,9 +7,9 @@ import _ from 'lodash';
 class Editor extends React.Component {
     constructor(props) {
         super(props);
-        this.backup_note = _.cloneDeep(this.props.data.note);
+        this.backup_note = this.props.data.note;
         this.events = new EditorEvents();
-        this.current_note = this.props.data.note;
+        this.current_note = _.cloneDeep(this.props.data.note);;
         this.state = {
             note: this.current_note
         }
