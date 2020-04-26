@@ -1,5 +1,5 @@
 import React from 'react';
-import KeyPoint from './KeyPoint';
+import { KeyPoint } from '../../components';
 import NoteEvents from './NoteEvents';
 
 class Note extends React.Component {

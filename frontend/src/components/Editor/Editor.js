@@ -1,6 +1,6 @@
 import React from 'react';
 import autoBind from 'auto-bind';
-import KeyPoint from './KeyPoint';
+import { KeyPoint } from '../../components';
 import EditorEvents from './EditorEvents';
 import _ from 'lodash';
 

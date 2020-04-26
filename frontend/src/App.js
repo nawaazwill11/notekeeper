@@ -1,7 +1,6 @@
 import React from 'react';
 import autoBind from 'auto-bind';
-import Note from './components/Note';
-import Editor from './components/Editor';
+import { Editor, Note }  from './components';
 import _ from 'lodash';
 
 class App extends React.Component {
