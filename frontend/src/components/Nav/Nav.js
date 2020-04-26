@@ -1,20 +1,22 @@
 import React from 'react';
-import { Layout, Anchor, Grid } from 'antd';
-import { Row, Col, Typography } from 'antd';
+import { Layout } from 'antd';
+import { Row, Col, Typography, Tooltip } from 'antd';
 import './Nav.scss';
 
 const { Header } = Layout;
-const { Link } = Anchor;
+const { Title } = Typography;
 
 class Nav extends React.Component {
     render() {
         return (
-            <Header>
-                <Row className="nav-row">
+            <Header className="nav">
+                <Row>
                     <Col span={24}>
-                        <Anchor affix={false} style={{height: '64px'}}>
-                            <Link href="#components-anchor-demo-static" title="NoteKeeper" />
-                        </Anchor>
+                        <Tooltip placement="bottom" title="A Rapid Note-Keeping App">
+                            <div className="site-name">
+                                NoteKeeper
+                            </div>
+                        </Tooltip>
                     </Col>
                 </Row>
             </Header>
