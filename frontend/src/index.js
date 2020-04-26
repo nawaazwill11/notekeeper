@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Utility } from './components';
+import { Nav, Utility } from './components';
 import { Layout } from 'antd';
-
+import { Row, Col, Typography } from 'antd';
 
 function writer(data) {
     console.log('writer', data)
@@ -34,24 +34,27 @@ window.onload = function () {
     
 }
 
-const { Header, Content, Footer } = Layout;
-
 function loadApp(App) {
+    const { Header, Content, Footer } = Layout;
+
     ReactDOM.render(
-        <React.StrictMode>
-            <Layout>
-                <Header>Header</Header>
-                <Content>{ App }</Content>
-                <Footer>Footer</Footer>
-            </Layout>
-        </React.StrictMode>,
+        <Layout>
+            <Nav />
+            <Content>{ App }</Content>
+            <Footer>Footer</Footer>
+        </Layout>,
         document.getElementById('root')
     );
 }
 
 function LoadError(props) {
+    const { Title } = Typography;
     return (
-        <h1>{props.error}</h1>
+        <Row justify="center" gutter={[8, 24]} align="middle">
+            <Col className="gutter-row">
+                <Title>{ props.error }</Title>
+            </Col>
+        </Row>
     )
 }
 
