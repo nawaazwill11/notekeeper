@@ -16,8 +16,7 @@ router.get('/loadData', function (request, response) {
 });
 
 router.post('/writeData', function(request, response) {
-    const database = request.body;
-    
+    const database = request.body.body; 
     if (typeof(database) === 'object') {
         console.log('Level 1')
         if ('notes' in database) {

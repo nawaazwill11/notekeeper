@@ -9,18 +9,20 @@ import { Row, Col, Typography } from 'antd';
 
 function writer(data) {
     console.log('writer', data)
-    new Utility().request.post('http://localhost:5000/api/writeData', data)
+    new Utility().request.post('http://127.0.0.1:5000/api/writeData', data)
         .then((response) => console.log(response));
 }
 
 window.onload = function () {
     const util = new Utility();
 
-    util.request.get('http://localhost:5000/api/loadData')
+    util.request.get('http://127.0.0.1:5000/api/loadData')
         .then((response) => {
-            const data = util.parseData.json(response.data);
-            if (data) {
-                loadApp(<App data={data} writer={writer}/>);
+            if(response.status === 200) {
+                response.json()
+                    .then((data) => {
+                       loadApp(<App data={data} writer={writer}/>);
+                    })
             } 
             else {
                 loadApp(<LoadError error="Faulty data" />);
@@ -28,7 +30,7 @@ window.onload = function () {
         })
         .catch((error) => {
             console.error(error);
-            loadApp(<LoadError error="500 - Server Error Occurred" />);
+            loadApp(<LoadError error={"500 - Server Error Occurred " + error} />);
             
         })
     
