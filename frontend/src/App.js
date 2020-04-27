@@ -2,6 +2,9 @@ import React from 'react';
 import autoBind from 'auto-bind';
 import { Editor, Note }  from './components';
 import _ from 'lodash';
+import { Row, Col, Button } from 'antd';
+import './App.scss'
+import AppEvents from './AppEvents';
 
 class App extends React.Component {
     constructor(props) {
@@ -11,6 +14,7 @@ class App extends React.Component {
             mode: 'view',
             note: {}
         }
+        this.events = new AppEvents();
         autoBind(this);
     }
     toggleMode(type, note={}) {
@@ -32,7 +36,8 @@ class App extends React.Component {
         }
 
         mode = mode === 'view' ? 'edit' : 'view';
-
+        
+        this.events.toggled(mode);
         this.updateState(mode, note);
     }
 
@@ -64,46 +69,56 @@ class App extends React.Component {
         const notes = this.data.notes.map((note) => {
             // console.log('Inside note mapping', note);
             return (
-                <Note 
-                    key={"_" + note.id} 
-                    note={note}
-                    events={{
-                        toggleMode: this.toggleMode
-                    }}
-                />
+                <Col key={"_" + note.id} className="note-main"
+                    xs={24} sm={12} md={8} lg={6}>
+                    <Note 
+                        note={note}
+                        events={{
+                            toggleMode: this.toggleMode
+                        }}
+                    />
+                </Col>
             );
         });
 
         return (
-            <div id="content">
-                <div id="control-container">
-                    <div id="control-content">
-                        <div id="add-note" className="control">
-                            <button className="btn"
-                                onClick={() => {
-                                    const id = this.nextSequence();
-                                    this.toggleMode(null, {id: id, title: '', data: [], kp_id_seq: 0})
-                                }}>
-                                New note
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <main id="notes-container">
-                    <div id="checker">
-                        <input type="checkbox" />
-                    </div>
-                    <div id="notes-content">
-                        {notes}
-                    </div>
-                </main>
-                {this.state.mode === 'edit' 
-                    ? <Editor 
-                        data={{note: this.state.note}} 
-                        toggleMode={this.toggleMode} /> 
-                    : ''
-                }
-            </div>
+            <Row justify="center">
+                <Col id="content" span={22}>
+                    <Row justify="center" gutter={[16, 24]} style={{marginTop: '20px'}}>
+                        <Col id="controls" className="gutter-row control" span={23}>
+                            <Row>
+                                <Col className="control-item" span={4}>
+                                    <Button type="primary"
+                                        onClick={() => {
+                                            const id = this.nextSequence();
+                                            this.toggleMode(null, {id: id, title: '', data: [], kp_id_seq: 0})}}>
+                                        New Note
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col id="note-container" span={24}>
+                            <div id="checker">
+                                <input type="checkbox" />
+                            </div>
+                            <div className="site-card-wrapper">
+                                <Row>
+                                    {notes}
+                                </Row>
+                            </div>
+                            {/* <div id="notes-content">
+                                {notes}
+                            </div> */}
+                        </Col>
+                        {this.state.mode === 'edit' 
+                            ? <Editor 
+                                data={{note: this.state.note}} 
+                                toggleMode={this.toggleMode} /> 
+                            : ''
+                        }    
+                    </Row>
+                </Col>
+            </Row>
         )
     }
 }

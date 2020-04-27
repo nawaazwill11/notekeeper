@@ -3,6 +3,8 @@ import autoBind from 'auto-bind';
 import { KeyPoint } from '../../components';
 import EditorEvents from './EditorEvents';
 import _ from 'lodash';
+import './styles/styles.scss';
+import { Row, Col, Button } from 'antd';
 
 class Editor extends React.Component {
     constructor(props) {
@@ -77,16 +79,17 @@ class Editor extends React.Component {
         });
 
         return (
-            <div id="editor-container">
-                <div id="editor-panel">
+            <Row id="editor-container">
+                <Col id="editor-panel" 
+                    xs={24} md={18}>
                     <div id="editor-content">
                         <div data-note={this.current_note.id}></div>
                         {/* <div id="editor-close">
                             <button 
-                                onClick={(e) => {
-                                    this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
-                                }}>
-                                x
+                            onClick={(e) => {
+                                this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
+                            }}>
+                            x
                             </button>
                         </div> */}
                         <div id="note-main-container">
@@ -114,27 +117,28 @@ class Editor extends React.Component {
                         <div id="editor-controls-container">
                             <div id="editor-controls-content">
                                 <div id="editor-controls">
-                                    <div className="editor-control-node">
-                                        <button id="save" onClick={(e) => {
-                                            this.events.actions.save(e, this.current_note, this.props.toggleMode)
-                                            }}>
-                                            Save
-                                        </button>
-                                    </div>
-                                    <div className="editor-control-node">
-                                        <button id="discard"
+                                <div className="editor-control-node">
+                                        <Button id="discard" danger
                                             onClick={(e) => {
                                                 this.events.actions.close(e, this.backup_note, this.props.toggleMode)
                                             }}>
                                             Discard
-                                        </button>
+                                        </Button>
+                                    </div>
+                                    <div className="editor-control-node">
+                                        <Button id="save" type="primary" onClick={(e) => {
+                                            this.events.actions.save(e, this.current_note, this.props.toggleMode)
+                                        }}>
+                                            Save
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </Col>
+            </Row>
+            
         )
     }
 }

@@ -12,9 +12,6 @@ class NoteEvents {
         menuOptions: function(el) {
             if (el.className === 'note') return el.querySelector('.note-menu-list-container');
             return el.closest('.note').querySelector('.note-menu-list-container');
-        },
-        menuItem: function(el) {
-            
         }
     }
     note = {

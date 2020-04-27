@@ -1,0 +1,82 @@
+.note-main {
+    transition: all ease 0.1s;
+}
+// .note-main:nth-child(3n+1) {
+//     order: 1
+// }
+// .note-main:nth-child(3n+2) {
+//     order: 2
+// }
+// .note-main:nth-child(3n+3) {
+//     order: 3
+// }
+
+
+#notes-container {
+    position: relative;
+    background-color: lightpink;
+  }
+  #notes-content {
+    display: flex;
+    flex-wrap: wrap;
+    
+    .active {
+      background-color: lightsalmon;
+    }
+  }
+  .note {
+    position: relative;
+    border: 1px solid white;
+    width: 27%;
+    height: 160px;
+    overflow-y: auto;
+    cursor: pointer;
+    
+    .visible {
+      display: block;
+    }
+  }
+  .note:hover {
+    box-shadow: 0 0 0px 2px lightgray;
+  }
+  .note-menu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    transition: 0.5s ease;
+  
+    img {
+      width: 17px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+  }
+  .note-menu-list-container {
+    position: relative;
+    display: none;
+    background-color: white;
+    border: 1px solid lightgray;
+    top: 25px;
+  }
+  .note-menu-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+  }
+  .note-menu-item {
+    padding: 7px 15px;
+  }
+  .note-menu-item:hover {
+    background-color: lightgray;
+  }
+  .note-title {
+    border-bottom: 1px solid white;
+    padding: 10px;
+    height: 42px;
+  }
+  .note-main {
+    padding: 10px;
+    min-height: 100px;
+  }

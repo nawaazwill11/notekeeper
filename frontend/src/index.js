@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Nav, Utility } from './components';
+import { Header, Utility, Footer } from './components';
 import { Layout } from 'antd';
 import { Row, Col, Typography } from 'antd';
 
@@ -35,13 +35,13 @@ window.onload = function () {
 }
 
 function loadApp(App) {
-    const { Header, Content, Footer } = Layout;
+    const { Content } = Layout;
 
     ReactDOM.render(
         <Layout>
-            <Nav />
+            <Header />
             <Content>{ App }</Content>
-            <Footer>Footer</Footer>
+            <Footer />
         </Layout>,
         document.getElementById('root')
     );

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Layout } from 'antd';
-import { Row, Col, Typography, Tooltip } from 'antd';
+import { Row, Col, Tooltip } from 'antd';
 import './Nav.scss';
 
 const { Header } = Layout;
-const { Title } = Typography;
 
-class Nav extends React.Component {
+class _Header extends React.Component {
     render() {
         return (
             <Header className="nav">
@@ -23,4 +22,4 @@ class Nav extends React.Component {
         )
     }
 }
-export default Nav;
+export default _Header;
