@@ -26,7 +26,7 @@
   }
   .note {
     position: relative;
-    border: 1px solid white;
+    border-color: #e0e0e0;
     width: 27%;
     height: 160px;
     overflow-y: auto;
@@ -43,7 +43,7 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    display: none;
+    // display: none;
     transition: 0.5s ease;
   
     img {

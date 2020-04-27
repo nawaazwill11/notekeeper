@@ -16,10 +16,14 @@ class NoteEvents {
     }
     note = {
         onMouseEnter: (e) => {
-            this.element.menu(e.currentTarget).classList.add('visible');
+            if (window.innerWidth > 766) {
+                this.element.menu(e.currentTarget).classList.add('visible');
+            }
         },
         onMouseLeave: (e) => {
-            this.element.menu(e.currentTarget).classList.remove('visible');
+            if (window.innerWidth > 766) {
+                this.element.menu(e.currentTarget).classList.remove('visible');
+            }
             this.element.menuOptions(e.currentTarget).classList.remove('visible');
         },
         onClick: (e, note, toggleMode) => {

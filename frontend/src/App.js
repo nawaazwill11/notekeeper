@@ -2,7 +2,7 @@ import React from 'react';
 import autoBind from 'auto-bind';
 import { Editor, Note }  from './components';
 import _ from 'lodash';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Divider } from 'antd';
 import './App.scss'
 import AppEvents from './AppEvents';
 
@@ -66,26 +66,42 @@ class App extends React.Component {
     }
     render() {
         // console.log('App render', this.data);
-        const notes = this.data.notes.map((note) => {
+        let notes = this.data.notes.map((note) => {
             // console.log('Inside note mapping', note);
             return (
-                <Col key={"_" + note.id} className="note-main"
-                    xs={24} sm={12} md={8} lg={6}>
-                    <Note 
-                        note={note}
-                        events={{
-                            toggleMode: this.toggleMode
-                        }}
-                    />
-                </Col>
+                <Row key={"_" + note.id}>
+                    <Col className="note-main"
+                        xs={24} sm={12} md={8} lg={6}>
+                        <Note 
+                            note={note}
+                            events={{
+                                toggleMode: this.toggleMode
+                            }}
+                        />
+                    </Col>
+                </Row>
             );
         });
-
+        console.log(notes);
+        if (!notes.length) {
+            notes = (
+                <Row justify="center" align="middle" style={{height: '200px'}}>
+                    <Col span={12}>
+                        <div className="no-note" style={{textAlign: 'center'}}>
+                            Notes empty.
+                            <br />
+                            Click 'New Note' to add.
+                        </div>
+                    </Col>
+                </Row>
+            )
+        }
+        console.log(notes);
         return (
             <Row justify="center">
                 <Col id="content" span={22}>
-                    <Row justify="center" gutter={[16, 24]} style={{marginTop: '20px'}}>
-                        <Col id="controls" className="gutter-row control" span={23}>
+                    <Row id="content-container" justify="center" gutter={[16, 24]} style={{marginTop: '20px'}}>
+                        <Col id="controls" className="gutter-row control" span={24}>
                             <Row>
                                 <Col className="control-item" span={4}>
                                     <Button type="primary"
@@ -97,14 +113,13 @@ class App extends React.Component {
                                 </Col>
                             </Row>
                         </Col>
+                        <Divider className="divider_" orientation="left" style={{ color: '#333', fontWeight: 'normal' }}>All notes</Divider>
                         <Col id="note-container" span={24}>
                             <div id="checker">
                                 <input type="checkbox" />
                             </div>
                             <div className="site-card-wrapper">
-                                <Row>
-                                    {notes}
-                                </Row>
+                                {notes}
                             </div>
                             {/* <div id="notes-content">
                                 {notes}

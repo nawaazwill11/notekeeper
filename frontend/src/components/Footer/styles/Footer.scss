@@ -2,6 +2,14 @@
     background-color: #001529;
     color: white;
 }
-#site-author {
+.site-info {
     text-align: center;
+    
+    * {
+        color: #ffffffcf;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
 }

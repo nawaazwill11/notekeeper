@@ -1,6 +1,8 @@
 import React from 'react';
 import KeyPointEvents from './KeyPointsEvents';
 import autoBind from 'auto-bind';
+import './styles/styles.scss';
+import { Input } from 'antd';
 
 class KeyPoint extends React.Component {
     constructor(props) {
@@ -20,7 +22,7 @@ class KeyPoint extends React.Component {
                     <div className="kp-block-content">
                         <div className="kp-block-layer">
                             <div className="kp-keypoint">
-                                <input className="inp-flat" type="text" placeholder="Keypoint" data-type="keypoint" data-block_id={kp.id}
+                                <Input className="inp-flat" placeholder="Keypoint" data-type="keypoint" data-block_id={kp.id}
                                     defaultValue={kp.keypoint}
                                     onKeyUp={(e) => {
                                         this.events.input.change(e, 'keypoint', this.props.events.updateKeyPoint)
@@ -30,7 +32,7 @@ class KeyPoint extends React.Component {
                         </div>
                         <div className="kp-block-layer">
                             <div className="kp-desc">
-                                <input className="inp-flat" type="text" placeholder="Description" data-type="desc" data-block_id={kp.id} 
+                                <Input className="inp-flat" placeholder="Description" data-type="desc" data-block_id={kp.id} 
                                     defaultValue={kp.desc ? kp.desc : ''} 
                                     onKeyUp={(e) => {
                                         this.events.input.change(e, 'desc', this.props.events.updateKeyPoint)
@@ -45,14 +47,14 @@ class KeyPoint extends React.Component {
                                 <button 
                                     data-block_id={kp.id}
                                     onClick={(e) => { this.events.actions.delete(e, this.props.events.removeBlock) }}>
-                                    -
+                                    <img src="delete.svg" />
                                 </button>
                             </div>
                             <div className="action-node copy">
                                 <button 
                                     data-block_id={kp.id}
                                     onClick={(e) => { this.events.actions.duplicate(e, this.props.events.duplicateBlock) }}>
-                                    C
+                                    <img src="copy.svg" />
                                 </button>
                             </div>
                         </div>

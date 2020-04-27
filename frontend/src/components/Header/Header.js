@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { Row, Col, Tooltip } from 'antd';
-import './Nav.scss';
+import './styles/styles.scss';
 
 const { Header } = Layout;
 

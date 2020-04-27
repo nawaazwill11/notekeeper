@@ -4,7 +4,7 @@ import { KeyPoint } from '../../components';
 import EditorEvents from './EditorEvents';
 import _ from 'lodash';
 import './styles/styles.scss';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Input, Divider } from 'antd';
 
 class Editor extends React.Component {
     constructor(props) {
@@ -94,11 +94,12 @@ class Editor extends React.Component {
                         </div> */}
                         <div id="note-main-container">
                             <div id="note-title">
-                                <input type="text" placeholder="Title" defaultValue={note.title} 
+                                <Input placeholder="Add title" defaultValue={note.title} 
                                     onKeyUp={(e) => {
                                         this.events.title.keyUp(e, this.updateTitle)
                                     }}/>
                             </div>
+                            <Divider className="divider_" orientation="left" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
                             <div id="note-main">
                                 <div id="kp-container">
                                     <div id="kp-main">
@@ -109,7 +110,7 @@ class Editor extends React.Component {
                                     <button 
                                         onClick={(e) => {
                                             this.events.actions.addNewBlock(e, this.addBlock)}}>
-                                        Add keypoint
+                                        Add
                                     </button>
                                 </div>
                             </div>
