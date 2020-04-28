@@ -1,16 +1,3 @@
-<!-- Styles -->
-<style>
-    a {
-        text-decoration: none;
-        color: #428bca;
-        font-size: 16px
-    }
-    a:visited {
-        color: #428bca
-    }
-</style>
-
-<!-- Visible region -->
 # Note Keeper
 
 
