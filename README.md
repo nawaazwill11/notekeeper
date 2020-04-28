@@ -1,4 +1,18 @@
+<!-- Styles -->
+<style>
+    a {
+        text-decoration: none;
+        color: #428bca;
+        font-size: 16px
+    }
+    a:visited {
+        color: #428bca
+    }
+</style>
+
+<!-- Visible region -->
 # Note Keeper
+
 
 <blockquote>
 <h2>Description</h2>
@@ -17,9 +31,13 @@
 <h2>Installation</h2>
 
 <ul>
-    <li>Run the <b>install.sh</b> script. This will install the required packages onto your system.</li>
-    <li>Start the frontend server (cd frontend && npm start) via terminal.</li>
-    <li>Similarly, start the backend server (cd backend && npm start) on a different terminal.</li>
+    <li>Run the command: <code>npm run install-app</code></li>
+    <li>Then run: <code>npm run dev</code>
 </ul>
 
 </blockquote>
+<br />
+<br />
+Find out more about the author:
+<br />
+<a href="https://www.linkedin.com/in/nawaaz-kortiwala-a01099113/">Nawaaz Kortiwala</a>
