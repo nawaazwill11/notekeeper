@@ -4,7 +4,7 @@ import { KeyPoint } from '../../components';
 import EditorEvents from './EditorEvents';
 import _ from 'lodash';
 import './styles/styles.scss';
-import { Row, Col, Button, Input, Divider } from 'antd';
+import { Row, Col, Button, Input, Divider, Tabs } from 'antd';
 
 class Editor extends React.Component {
     constructor(props) {
@@ -20,10 +20,10 @@ class Editor extends React.Component {
 
     updateState() {
         this.setState({
-           note: this.current_note
+           note: this.current_note,
         })
-
     }
+
     updateTitle(title) {
         this.current_note.title = title;
         this.updateState(this.current_note);
@@ -72,63 +72,73 @@ class Editor extends React.Component {
                     events= {{
                         updateKeyPoint: this.updateKeyPoint,
                         removeBlock: this.removeBlock,
-                        duplicateBlock: this.duplicateBlock
+                        duplicateBlock: this.duplicateBlock,
+                        matchedNotes: this.props.events.matchedNotes,
                     }}
                 />
             )
         });
+        
+        const { TabPane } = Tabs;
 
         return (
             <Row id="editor-container">
-                <Col id="editor-panel" 
+                <Col id="editor-panel" onKeyDown={this.events.actions.escape} 
                     xs={24} md={18}>
                     <div id="editor-content">
                         <div data-note={this.current_note.id}></div>
                         {/* <div id="editor-close">
                             <button 
                             onClick={(e) => {
-                                this.events.actions.closeEditor(e, this.current_note, this.props.toggleMode)
+                                this.events.actions.closeEditor(e, this.current_note, this.props.events.toggleMode)
                             }}>
                             x
                             </button>
                         </div> */}
-                        <div id="note-main-container">
-                            <div id="note-title">
-                                <Input placeholder="Add title" defaultValue={note.title} 
-                                    onKeyUp={(e) => {
-                                        this.events.title.keyUp(e, this.updateTitle)
-                                    }}/>
-                            </div>
-                            <Divider className="divider_" orientation="left" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
-                            <div id="note-main">
-                                <div id="kp-container">
-                                    <div id="kp-main">
-                                        {key_points}
+                        <Tabs defaultActiveKey="1" tabPosition="top" style={{height: '100%'}}>
+                            <TabPane tab="Tab-1" key="1">
+                                <div id="note-main-container">
+                                    <div id="note-title">
+                                        <Input placeholder="Add title" defaultValue={note.title} 
+                                            onKeyUp={(e) => {
+                                                this.events.title.keyUp(e, this.updateTitle)
+                                            }}/>
+                                    </div>
+                                    <Divider className="divider_" orientation="left" style={{ color: '#333', fontWeight: 'normal' }}></Divider>
+                                    <div id="note-main">
+                                        <div id="kp-container">
+                                            <div id="kp-main">
+                                                {key_points}
+                                            </div>
+                                        </div>
+                                        <div id="kp-adder">
+                                            <button 
+                                                onClick={(e) => {
+                                                    this.events.actions.addNewBlock(e, this.addBlock)}}>
+                                                Add
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div id="kp-adder">
-                                    <button 
-                                        onClick={(e) => {
-                                            this.events.actions.addNewBlock(e, this.addBlock)}}>
-                                        Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            </TabPane>
+                            <TabPane tab="Tab-2" key="2">
+
+                            </TabPane>
+                        </Tabs>
                         <div id="editor-controls-container">
                             <div id="editor-controls-content">
                                 <div id="editor-controls">
                                 <div className="editor-control-node">
-                                        <Button id="discard" danger
+                                        <Button className="discard" danger
                                             onClick={(e) => {
-                                                this.events.actions.close(e, this.backup_note, this.props.toggleMode)
+                                                this.events.actions.close(e, this.backup_note, this.props.events.toggleMode)
                                             }}>
                                             Discard
                                         </Button>
                                     </div>
                                     <div className="editor-control-node">
-                                        <Button id="save" type="primary" onClick={(e) => {
-                                            this.events.actions.save(e, this.current_note, this.props.toggleMode)
+                                        <Button className="save" type="primary" onClick={(e) => {
+                                            this.events.actions.save(e, this.current_note, this.props.events.toggleMode)
                                         }}>
                                             Save
                                         </Button>

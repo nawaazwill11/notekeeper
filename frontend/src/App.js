@@ -17,6 +17,16 @@ class App extends React.Component {
         this.events = new AppEvents();
         autoBind(this);
     }
+    
+    matchedNotes(string) {
+        const pattern = new RegExp(string, 'gi');
+        return this.data.notes.map((note) => {
+            if (note.title.match(pattern)) 
+                return { id: note.id, title: note.title }
+            return false;
+        });
+    }
+
     toggleMode(type, note={}) {
         let mode = this.state.mode;
         
@@ -69,17 +79,15 @@ class App extends React.Component {
         let notes = this.data.notes.map((note) => {
             // console.log('Inside note mapping', note);
             return (
-                <Row key={"_" + note.id}>
-                    <Col className="note-main"
-                        xs={24} sm={12} md={8} lg={6}>
-                        <Note 
-                            note={note}
-                            events={{
-                                toggleMode: this.toggleMode
-                            }}
-                        />
-                    </Col>
-                </Row>
+                <Col key={"_" + note.id} className="note-main"
+                    xs={24} sm={12} md={8} lg={6}>
+                    <Note 
+                        note={note}
+                        events={{
+                            toggleMode: this.toggleMode
+                        }}
+                    />
+                </Col>
             );
         });
         console.log(notes);
@@ -96,7 +104,6 @@ class App extends React.Component {
                 </Row>
             )
         }
-        console.log(notes);
         return (
             <Row justify="center">
                 <Col id="content" span={22}>
@@ -119,7 +126,9 @@ class App extends React.Component {
                                 <input type="checkbox" />
                             </div>
                             <div className="site-card-wrapper">
-                                {notes}
+                                <Row>
+                                    {notes}
+                                </Row>
                             </div>
                             {/* <div id="notes-content">
                                 {notes}
@@ -128,7 +137,10 @@ class App extends React.Component {
                         {this.state.mode === 'edit' 
                             ? <Editor 
                                 data={{note: this.state.note}} 
-                                toggleMode={this.toggleMode} /> 
+                                events={{
+                                    toggleMode: this.toggleMode,
+                                    matchedNotes: this.matchedNotes,
+                                }} /> 
                             : ''
                         }    
                     </Row>

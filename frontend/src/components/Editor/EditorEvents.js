@@ -15,6 +15,11 @@ class EditorsEvents {
         close: (e, note, toggleMode) => {
             // console.log('Note changes discarded', note);
             toggleMode(null, note);
+        },
+        escape: (e) => {
+            if (e.keyCode === 27) {
+                e.target.closest('#editor-container').querySelector('.discard').click();
+            }
         }
     }
     title = {

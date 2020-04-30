@@ -9,14 +9,14 @@ import { Row, Col, Typography } from 'antd';
 
 function writer(data) {
     console.log('writer', data)
-    new Utility().request.post('http://127.0.0.1:5000/api/writeData', data)
+    new Utility().request.post('/api/writeData', data)
         .then((response) => console.log(response));
 }
 
 window.onload = function () {
     const util = new Utility();
 
-    util.request.get('http://127.0.0.1:5000/api/loadData')
+    util.request.get('/api/loadData')
         .then((response) => {
             if(response.status === 200) {
                 response.json()
