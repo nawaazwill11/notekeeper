@@ -23,7 +23,6 @@ class App extends React.Component {
         return this.data.notes.map((note) => {
             if (note.title.match(pattern)) 
                 return { id: note.id, title: note.title }
-            return false;
         });
     }
 

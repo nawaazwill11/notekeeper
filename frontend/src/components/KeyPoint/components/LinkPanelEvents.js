@@ -5,8 +5,11 @@ class LinkPanelEvents {
         autoBind(this);
     }
     input = {
-        keyDown: (e, matchedNotes) => {
-            console.log(matchedNotes(e.target.value))
+        keyDown: (e, matchedNotes, updateListNotes) => {
+            const matched = matchedNotes(e.target.value);
+            const notes = matched.filter((match) => { if (match) return match.title })
+            console.log(notes);
+            updateListNotes(notes);
         }
     }
 }
