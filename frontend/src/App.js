@@ -92,15 +92,13 @@ class App extends React.Component {
         console.log(notes);
         if (!notes.length) {
             notes = (
-                <Row justify="center" align="middle" style={{height: '200px'}}>
-                    <Col span={12}>
-                        <div className="no-note" style={{textAlign: 'center'}}>
-                            Notes empty.
-                            <br />
-                            Click 'New Note' to add.
-                        </div>
-                    </Col>
-                </Row>
+                <Col span={24} style={{ paddingBottom: '25px'}}>
+                    <div className="no-note" style={{textAlign: 'center', color: '#808080cf'}}>
+                        Notes empty.
+                        <br />
+                        Click 'New Note' to add.
+                    </div>
+                </Col>
             )
         }
         return (

@@ -54,44 +54,6 @@ class Note extends React.Component {
                     </div>
                 </div>
             </Card>
-
-            // <div id={note.id} className="note" 
-            //     onMouseEnter={this.events.note.onMouseEnter}
-            //     onMouseLeave={this.events.note.onMouseLeave}
-            //     onClick={(e) => {
-            //         this.events.note.onClick(e, note, this.props.events.toggleMode)
-            //     }}
-            //     >
-            //     <div className="note-content">
-            //         <div className="note-menu " 
-            //             onClick={this.events.menu.open}>
-            //             <div className="note-menu-img">
-            //                 <img src="menu.svg" alt="menu" />
-            //             </div>
-            //             <div className="note-menu-list-container">
-            //                 <ul className="note-menu-list">
-            //                     <li className="note-menu-item" 
-            //                         onClick={(e) => this.events.menu.edit(e, note, this.props.events.toggleMode)}>
-            //                         Edit</li>
-            //                     <li className="note-menu-item"
-            //                         onClick={(e) => this.events.menu.delete(e, note, this.props.events.toggleMode)}
-            //                         >Delete</li>
-            //                     <li className="note-menu-item">Archive</li>
-            //                 </ul>
-            //             </div>
-            //         </div>
-            //         <Card className="note-content">
-            //             <div className="note-title">
-            //                 <b>{note.title}</b>
-            //             </div>
-            //             <div className="note-main">
-            //                 <div className="key-points">
-            //                     {key_points}
-            //                 </div>
-            //             </div>
-            //         </Card>
-            //     </div>
-            // </div>
         );
     }
 

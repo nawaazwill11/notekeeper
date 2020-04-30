@@ -18,6 +18,7 @@ class KeyPointEvents {
             const target = e.currentTarget;
             if (target.innerText === '') {
                 const placeholder = document.createElement('span');
+                placeholder.className = "placeholder";
                 placeholder.innerText = placeholder_text;
                 target.appendChild(placeholder);
                 target.dataset.typed = 'false';

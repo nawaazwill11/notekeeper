@@ -7,6 +7,7 @@ class EditorsEvents {
     actions = {
         addNewBlock: (e, addBlock) => {
             addBlock();
+            // kp_block.querySelector('.kp-keypoint .inp-flat').focus();
         },
         save: (e, note, toggleMode) => {
             // console.log('Note at save', note);
@@ -28,6 +29,12 @@ class EditorsEvents {
             // console.log(target.value);
             updateTitle(target.value);
         }
+    }
+    kp_focus = (id) => {
+        
+        const kp_block = document.querySelector(`#${id}`);
+        const keypoint = kp_block.querySelector('.inp-flat');
+        keypoint.focus();
     }
 }
 

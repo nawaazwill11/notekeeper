@@ -54,6 +54,7 @@ class KeyPoint extends React.Component {
                                         })
                                     }}>
                                      <span className="placeholder">Keypoint</span>
+                                     <a href='!#'>Linkesh</a> 
                                 </div>
                             </div>
                         </div>

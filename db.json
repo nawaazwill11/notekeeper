@@ -1,28 +1,3 @@
 {
-    "notes": [
-        {
-            "id": 1,
-            "title": "asd",
-            "data": [
-                {
-                    "id": "kp_1_2",
-                    "desc": "",
-                    "keypoint": "sdasds"
-                }
-            ],
-            "kp_id_seq": 2
-        },
-        {
-            "id": 2,
-            "title": "asda",
-            "data": [
-                {
-                    "id": "kp_2_1",
-                    "keypoint": "yoyoyo",
-                    "desc": ""
-                }
-            ],
-            "kp_id_seq": 1
-        }
-    ]
+    "notes": []
 }

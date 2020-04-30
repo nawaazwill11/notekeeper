@@ -18,9 +18,11 @@ class Editor extends React.Component {
         autoBind(this);
     }
 
-    updateState() {
+    updateState(callback) {
         this.setState({
            note: this.current_note,
+        }, function () {
+            if (callback) callback();
         })
     }
 
@@ -35,7 +37,7 @@ class Editor extends React.Component {
             ...this.current_note.data[index],
             ...data
         };
-        this.updateState(this.current_note);
+        this.updateState();
     }
 
     removeBlock(block_id) {
@@ -45,12 +47,16 @@ class Editor extends React.Component {
     }
 
     addBlock(kp={}) {
+        const id = this.nextSequence();
         this.current_note.data.push({
-            id: this.nextSequence(),
+            id: id,
             keypoint: kp.keypoint ? kp.keypoint : '',
             desc: kp.desc ? kp.desc : ''
         });
-        this.updateState();
+        const callback = () => {
+            this.events.kp_focus(id);
+        }
+        this.updateState(callback);
     }
 
     nextSequence() {
