@@ -5,11 +5,29 @@ class KeyPointEvents {
         autoBind(this);
     }
     input = {
+        focus: (e) => {
+            
+            const target = e.currentTarget;
+            if (target.dataset.typed === 'false') {
+                target.innerHTML = '';
+                target.dataset.typed = 'true'
+            }
+            console.log(target.dataset.typed)
+        },
+        focusOut: (e, placeholder_text) => {
+            const target = e.currentTarget;
+            if (target.innerText === '') {
+                const placeholder = document.createElement('span');
+                placeholder.innerText = placeholder_text;
+                target.appendChild(placeholder);
+                target.dataset.typed = 'false';
+            }
+        },
         change: (e, type, events) => {
             const target = e.currentTarget;
             const data = {}
             data['id'] = target.dataset.block_id;
-            data[type] = target.value;
+            data[type] = target.innerText;
             this.input.checkLink(e, events.toggleHash);
             events.updateKeyPoint(data);
         },

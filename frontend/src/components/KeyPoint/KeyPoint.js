@@ -2,7 +2,6 @@ import React from 'react';
 import KeyPointEvents from './KeyPointsEvents';
 import autoBind from 'auto-bind';
 import './styles/styles.scss';
-import { Input } from 'antd';
 import LinkPanel from './components/LinkPanel';
 
 class KeyPoint extends React.Component {
@@ -44,28 +43,34 @@ class KeyPoint extends React.Component {
                     <div className="kp-block-content">
                         <div className="kp-block-layer">
                             <div className="kp-keypoint">
-                                <Input className="inp-flat" placeholder="Keypoint" data-type="keypoint" data-block_id={kp.id}
-                                    defaultValue={kp.keypoint}
+                                <div className="inp-flat" data-typed="false" data-block_id={kp.id} contentEditable="true"
+                                    suppressContentEditableWarning={true}
+                                    onFocus={ this.events.input.focus }
+                                    onBlur={( e ) => { this.events.input.focusOut(e, 'Keyword') }}
                                     onKeyUp={(e) => {
                                         this.events.input.change(e, 'keypoint', {
                                             updateKeyPoint: this.props.events.updateKeyPoint,
                                             toggleHash: this.toggleHash
                                         })
-                                    }}
-                                />
+                                    }}>
+                                     <span className="placeholder">Keypoint</span>
+                                </div>
                             </div>
                         </div>
                         <div className="kp-block-layer">
                             <div className="kp-desc">
-                                <Input className="inp-flat" placeholder="Description" data-type="desc" data-block_id={kp.id} 
-                                    defaultValue={kp.desc ? kp.desc : ''} 
+                                <div className="inp-flat" data-typed="false" data-block_id={kp.id} contentEditable="true"
+                                    suppressContentEditableWarning={true}
+                                    onFocus={ this.events.input.focus }
+                                    onBlur={( e ) => { this.events.input.focusOut(e, 'Description') }}
                                     onKeyUp={(e) => {
-                                        this.events.input.change(e, 'keypoint', {
+                                        this.events.input.change(e, 'description', {
                                             updateKeyPoint: this.props.events.updateKeyPoint,
                                             toggleHash: this.toggleHash
                                         })
-                                    }}
-                                />
+                                    }}>
+                                    <span className="placeholder">Description</span>
+                                </div>
                             </div>
                         </div>
                     </div>
