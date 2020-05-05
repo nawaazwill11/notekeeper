@@ -7,8 +7,7 @@ class LinkPanelEvents {
     input = {
         keyDown: (e, matchedNotes, updateListNotes) => {
             const matched = matchedNotes(e.target.value);
-            const notes = matched.filter((match) => { if (match) return match.title })
-            console.log(notes);
+            const notes = matched.filter((match) => match ? match.title : false)
             updateListNotes(notes);
         }
     }

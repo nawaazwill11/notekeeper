@@ -15,16 +15,74 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <input type="text" id="textbox" />
-        <div id="input">e</div>
+        <input type="text" id="textbox" value="next" />
+        <div id="input" contenteditable="true">
+            Selected the next word.
+        </div>
         <script async defer>
-            const inp = document.querySelector('#textbox');
-            inp.addEventListener('keyup', function (e) {
-                const input_value = e.target.value;
-                const fake_input = document.querySelector('#input')
-                fake_input.innerHTML = (input_value);
-            })
+            const textNode = input.firstChild;
+            const next_start = textNode.wholeText.indexOf('next');
+            const next_end = textNode.wholeText.indexOf('t ', next_start) + 1;
+            
+            const range = new Range();
+            range.setStart(textNode, next_end);
+            range.setEnd(textNode, next_end);
+            window.getSelection().addRange(range);
+            textbox.value = range;
+            
+        </script> 
+        <!--
+        <script>
+            function placeCaretAtEnd(el) {
+                el.focus();
+                /*
+                    var range = document.createRange();
+                    range.selectNodeContents(el);
+                    range.collapse(false);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                */
+                
+                const range = new Range();
+                range.selectNodeContents(el);
+                range.collapse(false);
+                const sel = window.getSelection(range);
+                sel.removeAllRanges();
+                sel.addRange(range);
+                console.log(window.getSelection());
+            }
+            console.log(window.getSelection());
+            placeCaretAtEnd(input)
 
+            function getSelectionCharacterOffsetWithin(element) {
+                var start = 0;
+                var end = 0;
+                const sel = window.getSelection();
+                if (sel.rangeCount > 0) {
+                    const range = sel.getRangeAt(0);
+                    start = range.startOffset;
+                    end = range.endOffset;
+                    /*
+                    const range = window.getSelection().getRangeAt(0);
+                    const preCaretRange = range.cloneRange();
+                    preCaretRange.selectNodeContents(target);
+                    preCaretRange.setEnd(range.startContainer, range.startOffset);
+                    const start = preCaretRange.toString().length;
+                    preCaretRange.setEnd(range.endContainer, range.endOffset);
+                    const end = preCaretRange.toString().length;
+                    console.log(start, end);
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(preCaretRange);
+                    */
+                }
+                return { start: start, end: end };
+            }
+            input.addEventListener('click', function () {
+                console.log(getSelectionCharacterOffsetWithin(input));
+            })
         </script>
+        -->
     </body>
 </html>

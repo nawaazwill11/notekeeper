@@ -20,10 +20,11 @@ class App extends React.Component {
     
     matchedNotes(string) {
         const pattern = new RegExp(string, 'gi');
-        return this.data.notes.map((note) => {
-            if (note.title.match(pattern)) 
-                return { id: note.id, title: note.title }
-        });
+        return this.data.notes.map((note) => 
+            note.title.match(pattern) ?
+                { id: note.id, title: note.title } :
+                false
+        );
     }
 
     toggleMode(type, note={}) {

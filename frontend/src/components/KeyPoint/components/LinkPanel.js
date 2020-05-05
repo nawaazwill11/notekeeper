@@ -8,15 +8,31 @@ class LinkPanel extends React.Component {
     constructor(props) {
         super(props);
         this.events = new LinkPanelEvents();
+        const active = false;
         this.state = {
-            link_notes: []
+            link_notes: [],
+            panel: {
+                active: false,
+                styles: {
+                    top: 'unset',
+                    left: 'unset',
+                    display: 'none'
+                }
+            }
         }
         autoBind(this);
     }
     updateState(changes) {
         this.setState({
-            ...changes
+            ...this.state,
+            ...changes,
         })
+    }
+    updatePanel(changes) {
+        this.updateState(changes);
+    }
+    isActive() {
+        return this.state.panel.active
     }
 
     updateListNotes(notes) {
@@ -44,7 +60,7 @@ class LinkPanel extends React.Component {
 
     render() {
         return (
-            <Row className="link-panel-container">
+            <Row id="link-panel" style={{ ...this.state.panel.styles }}>
                 <Col className="note-search" spam={24}>
                     <Input className="note-search-inp" placeholder="Search note" 
                         onKeyDown={(e) => { this.events.input.keyDown(e, this.props.events.matchedNotes, this.updateListNotes) }}/>

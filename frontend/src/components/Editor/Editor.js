@@ -28,9 +28,9 @@ class Editor extends React.Component {
 
     updateTitle(title) {
         this.current_note.title = title;
-        this.updateState(this.current_note);
     }
     updateKeyPoint(data) {
+        console.log(data);
         const id = data.id;
         const index = this.current_note.data.findIndex((data) => data.id === id);
         this.current_note.data[index] = {
@@ -53,9 +53,12 @@ class Editor extends React.Component {
             keypoint: kp.keypoint ? kp.keypoint : '',
             desc: kp.desc ? kp.desc : ''
         });
+
+        // Focus on new kp_block -> keypoint
         const callback = () => {
             this.events.kp_focus(id);
         }
+        
         this.updateState(callback);
     }
 
